@@ -3,7 +3,7 @@
  * Plugin Name: HNRK Cookie Consent
  * Plugin URI:  https://github.com/hnrk75/hnrk-cookie-concent
  * Description: Cookiebanner med stöd för Google Consent Mode v2. Hanterar kategorierna Nödvändiga, Analys, Funktionella och Marknadsföring.
- * Version:     1.0.1
+ * Version:     1.0.0
  * Author:      Henrik Pettersson
  * Author URI:  https://github.com/hnrk75
  * License:     GPL-2.0
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'HNRK_COOKIE_VERSION', '1.0.0' );
+define( 'HNRK_COOKIE_VERSION', get_file_data( __FILE__, array( 'Version' => 'Version' ) )['Version'] );
 
 require_once plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
 require_once plugin_dir_path( __FILE__ ) . 'inc/settings.php';
