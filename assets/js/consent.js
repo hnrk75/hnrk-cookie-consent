@@ -1,6 +1,6 @@
 (() => {
-	const COOKIE_NAME = 'wpst-consent';
-	const COOKIE_DAYS = window.wpstCookieSettings?.cookieDays ?? 365;
+	const COOKIE_NAME = 'hnrk-consent';
+	const COOKIE_DAYS = window.hnrkCookieSettings?.cookieDays ?? 365;
 
 	// --- Cookie utilities ---
 	const setCookie = (name, value, days) => {
@@ -144,7 +144,7 @@
 	// --- Button handlers ---
 
 	banner.querySelector('[data-consent-accept]')?.addEventListener('click', () => {
-		const s = window.wpstCookieSettings ?? {};
+		const s = window.hnrkCookieSettings ?? {};
 		saveConsent({
 			necessary:  true,
 			analytics:  !!s.enableAnalytics,

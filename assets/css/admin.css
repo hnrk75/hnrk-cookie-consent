@@ -1,4 +1,4 @@
-.wpst-cookie-admin__card {
+.hnrk-cookie-admin__card {
   background: #fff;
   border: 1px solid #dcdcde;
   border-radius: 0.75rem;
@@ -6,50 +6,50 @@
   box-shadow: 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.04);
   margin-top: 1.5rem;
 }
-.wpst-cookie-admin__card h2 {
+.hnrk-cookie-admin__card h2 {
   margin-top: 0;
   margin-bottom: 1rem;
 }
-.wpst-cookie-admin__card .form-table {
+.hnrk-cookie-admin__card .form-table {
   margin-top: 0;
 }
-.wpst-cookie-admin__card .form-table th {
+.hnrk-cookie-admin__card .form-table th {
   width: 12.5rem;
   vertical-align: top;
 }
-.wpst-cookie-admin__card .form-table td p {
+.hnrk-cookie-admin__card .form-table td p {
   margin-top: 0;
 }
-.wpst-cookie-admin__card textarea {
+.hnrk-cookie-admin__card textarea {
   width: 100%;
   min-height: 6rem;
 }
-.wpst-cookie-admin__card-desc {
+.hnrk-cookie-admin__card-desc {
   margin-top: -0.5rem;
   margin-bottom: 1rem;
   font-size: 0.9375rem;
   color: #50575e;
 }
-.wpst-cookie-admin__category {
+.hnrk-cookie-admin__category {
   padding: 1rem;
   border: 1px solid #dcdcde;
   border-radius: 0.75rem;
   background: #f9f9f9;
 }
-.wpst-cookie-admin__checkbox {
+.hnrk-cookie-admin__checkbox {
   display: flex;
   align-items: center;
   gap: 0.625rem;
   font-weight: 600;
 }
-.wpst-cookie-admin__category-header {
+.hnrk-cookie-admin__category-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
   margin-bottom: 1rem;
 }
-.wpst-cookie-admin__edit-link {
+.hnrk-cookie-admin__edit-link {
   background: none;
   border: none;
   padding: 0;
@@ -60,45 +60,45 @@
   white-space: nowrap;
   flex-shrink: 0;
 }
-.wpst-cookie-admin__edit-link:hover {
+.hnrk-cookie-admin__edit-link:hover {
   color: #135e96;
 }
-.wpst-cookie-admin__category-preview {
+.hnrk-cookie-admin__category-preview {
   font-size: 0.9375rem;
   color: #50575e;
 }
-.wpst-cookie-admin__category-editor {
+.hnrk-cookie-admin__category-editor {
   width: 100%;
 }
-.wpst-cookie-admin__hint {
+.hnrk-cookie-admin__hint {
   font-size: 0.875rem;
   font-weight: 600;
   color: #1d2327;
   margin: 0;
   flex: 1;
 }
-.wpst-cookie-admin__trigger-options {
+.hnrk-cookie-admin__trigger-options {
   display: flex;
   flex-direction: row;
   gap: 1.5rem;
   margin-bottom: 1rem;
 }
-.wpst-cookie-admin__radio {
+.hnrk-cookie-admin__radio {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   font-size: 0.9375rem;
 }
-.wpst-cookie-admin__trigger-label {
+.hnrk-cookie-admin__trigger-label {
   margin-bottom: 1rem;
 }
-.wpst-cookie-admin__sub-label {
+.hnrk-cookie-admin__sub-label {
   display: block;
   margin-bottom: 0.375rem;
   font-weight: 600;
   font-size: 0.9375rem;
 }
-.wpst-cookie-admin__shortcode-box {
+.hnrk-cookie-admin__shortcode-box {
   margin-top: 1rem;
   padding: 0.875rem 1rem;
   background: #f0f6fc;
@@ -106,20 +106,20 @@
   border-radius: 0.5rem;
   font-size: 0.875rem;
 }
-.wpst-cookie-admin__shortcode-box p {
+.hnrk-cookie-admin__shortcode-box p {
   margin: 0 0 0.5rem;
 }
-.wpst-cookie-admin__shortcode-box p:last-child {
+.hnrk-cookie-admin__shortcode-box p:last-child {
   margin-bottom: 0;
 }
-.wpst-cookie-admin__shortcode-title {
+.hnrk-cookie-admin__shortcode-title {
   font-weight: 600;
 }
-.wpst-cookie-admin__shortcode-hint {
+.hnrk-cookie-admin__shortcode-hint {
   font-style: italic;
   padding-bottom: 1rem;
 }
-.wpst-cookie-admin__code {
+.hnrk-cookie-admin__code {
   display: inline-block;
   background: #fff;
   border: 1px solid #c3d9f0;

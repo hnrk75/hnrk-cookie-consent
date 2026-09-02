@@ -1,4 +1,4 @@
-@layer wpst-cookie-defaults {
+@layer hnrk-cookie-defaults {
   :root {
     --color-primary: #34a0a4;
     --color-dark: #0d2b3e;
@@ -110,16 +110,16 @@ body.cookie-banner-open {
   justify-content: flex-end;
 }
 
-.wpst-cookie-reopen {
+.hnrk-cookie-reopen {
   position: fixed;
   bottom: 1.5rem;
   right: 1.5rem;
 }
-.wpst-cookie-reopen--left {
+.hnrk-cookie-reopen--left {
   right: auto;
   left: 1.5rem;
 }
-.wpst-cookie-reopen {
+.hnrk-cookie-reopen {
   z-index: 1088;
   display: flex;
   align-items: center;
@@ -135,29 +135,29 @@ body.cookie-banner-open {
   box-shadow: 0 0.125rem 0.625rem rgba(0, 0, 0, 0.2);
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
-.wpst-cookie-reopen:hover {
+.hnrk-cookie-reopen:hover {
   opacity: 0.85;
   transform: translateY(-0.0625rem);
 }
-.wpst-cookie-reopen:focus-visible {
+.hnrk-cookie-reopen:focus-visible {
   outline: 0.125rem solid var(--color-primary);
   outline-offset: 0.1875rem;
 }
-.wpst-cookie-reopen__label {
+.hnrk-cookie-reopen__label {
   line-height: 1;
 }
 @media (width < 64rem) {
-  .wpst-cookie-reopen__label {
+  .hnrk-cookie-reopen__label {
     display: none;
   }
 }
 @media (width < 64rem) {
-  .wpst-cookie-reopen {
+  .hnrk-cookie-reopen {
     padding: 0.625rem;
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .wpst-cookie-reopen {
+  .hnrk-cookie-reopen {
     transition: none;
   }
 }

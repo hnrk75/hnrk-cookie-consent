@@ -2,13 +2,13 @@
 /**
  * Cookie consent banner template.
  *
- * Rendered in wp_footer via wpst_cookie_banner().
+ * Rendered in wp_footer via hnrk_cookie_banner().
  *
- * @package WPST Cookie Consent
+ * @package HNRK Cookie Consent
  */
 
-$settings        = wpst_cookie_get_settings();
-$cookie_page_url = apply_filters( 'wpst_cookie_page_url', $settings['cookie_page_url'] );
+$settings        = hnrk_cookie_get_settings();
+$cookie_page_url = apply_filters( 'hnrk_cookie_page_url', $settings['cookie_page_url'] );
 $banner_class    = 'bottom' === $settings['banner_position'] ? 'cookie-banner cookie-banner--bottom' : 'cookie-banner';
 ?>
 
@@ -45,14 +45,14 @@ $banner_class    = 'bottom' === $settings['banner_position'] ? 'cookie-banner co
 			<div class="cookie-category">
 				<label class="cookie-category__label">
 					<span class="cookie-category__title">
-						<?php esc_html_e( 'Nödvändiga', 'wpst-cookie-consent' ); ?>
+						<?php esc_html_e( 'Nödvändiga', 'hnrk-cookie-consent' ); ?>
 					</span>
 					<input
 						type="checkbox"
 						data-consent-toggle="necessary"
 						checked
 						disabled
-						aria-label="<?php esc_attr_e( 'Nödvändiga cookies, alltid aktiva', 'wpst-cookie-consent' ); ?>"
+						aria-label="<?php esc_attr_e( 'Nödvändiga cookies, alltid aktiva', 'hnrk-cookie-consent' ); ?>"
 						aria-describedby="desc-necessary"
 					>
 				</label>
@@ -63,7 +63,7 @@ $banner_class    = 'bottom' === $settings['banner_position'] ? 'cookie-banner co
 			<div class="cookie-category">
 				<label class="cookie-category__label">
 					<span class="cookie-category__title">
-						<?php esc_html_e( 'Analys', 'wpst-cookie-consent' ); ?>
+						<?php esc_html_e( 'Analys', 'hnrk-cookie-consent' ); ?>
 					</span>
 					<input
 						type="checkbox"
@@ -79,7 +79,7 @@ $banner_class    = 'bottom' === $settings['banner_position'] ? 'cookie-banner co
 			<div class="cookie-category">
 				<label class="cookie-category__label">
 					<span class="cookie-category__title">
-						<?php esc_html_e( 'Funktionella', 'wpst-cookie-consent' ); ?>
+						<?php esc_html_e( 'Funktionella', 'hnrk-cookie-consent' ); ?>
 					</span>
 					<input
 						type="checkbox"
@@ -95,7 +95,7 @@ $banner_class    = 'bottom' === $settings['banner_position'] ? 'cookie-banner co
 			<div class="cookie-category">
 				<label class="cookie-category__label">
 					<span class="cookie-category__title">
-						<?php esc_html_e( 'Marknadsföring', 'wpst-cookie-consent' ); ?>
+						<?php esc_html_e( 'Marknadsföring', 'hnrk-cookie-consent' ); ?>
 					</span>
 					<input
 						type="checkbox"
@@ -111,7 +111,7 @@ $banner_class    = 'bottom' === $settings['banner_position'] ? 'cookie-banner co
 			<div class="cookie-category">
 				<label class="cookie-category__label">
 					<span class="cookie-category__title">
-						<?php esc_html_e( 'Tredjepartstjänster', 'wpst-cookie-consent' ); ?>
+						<?php esc_html_e( 'Tredjepartstjänster', 'hnrk-cookie-consent' ); ?>
 					</span>
 					<input
 						type="checkbox"
@@ -127,13 +127,13 @@ $banner_class    = 'bottom' === $settings['banner_position'] ? 'cookie-banner co
 
 		<div class="cookie-banner__actions">
 			<button type="button" class="cookie-btn" data-consent-reject>
-				<?php esc_html_e( 'Avvisa alla', 'wpst-cookie-consent' ); ?>
+				<?php esc_html_e( 'Avvisa alla', 'hnrk-cookie-consent' ); ?>
 			</button>
 			<button type="button" class="cookie-btn" data-consent-save>
-				<?php esc_html_e( 'Spara inställningar', 'wpst-cookie-consent' ); ?>
+				<?php esc_html_e( 'Spara inställningar', 'hnrk-cookie-consent' ); ?>
 			</button>
 			<button type="button" class="cookie-btn" data-consent-accept>
-				<?php esc_html_e( 'Acceptera alla', 'wpst-cookie-consent' ); ?>
+				<?php esc_html_e( 'Acceptera alla', 'hnrk-cookie-consent' ); ?>
 			</button>
 		</div>
 	</div>

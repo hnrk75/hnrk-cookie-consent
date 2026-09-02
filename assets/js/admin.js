@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 	// Show / hide the floating button label field based on the trigger radio.
-	const triggerRadios  = document.querySelectorAll('[name="wpst_cookie_settings[manage_cookies_trigger]"]');
+	const triggerRadios  = document.querySelectorAll('[name="hnrk_cookie_settings[manage_cookies_trigger]"]');
 	const labelWrapper   = document.getElementById('trigger_label_wrapper');
 	if (triggerRadios.length && labelWrapper) {
 		triggerRadios.forEach((radio) => {
@@ -10,11 +10,11 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 	}
 
-	document.querySelectorAll('.wpst-cookie-admin__edit-link').forEach((btn) => {
+	document.querySelectorAll('.hnrk-cookie-admin__edit-link').forEach((btn) => {
 		const editor  = document.getElementById(btn.getAttribute('aria-controls'));
-		const body    = btn.closest('.wpst-cookie-admin__category')
-			?.querySelector('.wpst-cookie-admin__category-body');
-		const preview = body?.querySelector('.wpst-cookie-admin__category-preview');
+		const body    = btn.closest('.hnrk-cookie-admin__category')
+			?.querySelector('.hnrk-cookie-admin__category-body');
+		const preview = body?.querySelector('.hnrk-cookie-admin__category-preview');
 
 		if (!editor) return;
 

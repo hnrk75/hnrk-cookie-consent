@@ -2,7 +2,7 @@
 // Sits inside a named layer so any un-layered theme stylesheet wins.
 // Mirrors the values from wp-starter-theme/_root.scss.
 
-@layer wpst-cookie-defaults {
+@layer hnrk-cookie-defaults {
 	:root {
 		// --- Colors ---
 		--color-primary:    #34a0a4;

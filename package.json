@@ -1,8 +1,8 @@
 {
   "type": "module",
-  "name": "wpst-cookie-consent",
+  "name": "hnrk-cookie-consent",
   "version": "1.0.0",
-  "description": "Build pipeline for WPST Cookie Consent",
+  "description": "Build pipeline for HNRK Cookie Consent",
   "author": {
     "name": "Henrik Pettersson"
   },
