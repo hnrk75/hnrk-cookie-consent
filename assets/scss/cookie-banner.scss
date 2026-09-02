@@ -1,0 +1,243 @@
+@use "defaults";
+
+// Lock background scroll when the banner is open.
+body.cookie-banner-open {
+	overflow: hidden;
+}
+
+// =============================================================
+// Cookie overlay — full-screen dimmed backdrop
+// =============================================================
+
+.cookie-overlay {
+	position: fixed;
+	inset: 0;
+	z-index: 1089;
+	background: rgb(0 0 0 / 0.5);
+}
+
+// =============================================================
+// Cookie banner — centred modal
+// =============================================================
+
+.cookie-banner {
+	// Layout
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 1090;
+	width: min(40rem, calc(100vw - 2rem));
+	max-height: calc(100dvh - 2rem);
+	overflow-y: auto;
+
+	// Appearance — inherits all tokens from the active theme
+	background-color: var(--color-white);
+	border: 1px solid var(--color-gray-light);
+	border-radius: var(--radius-md);
+
+	font-family: var(--font-family-body);
+	font-size: var(--wp--preset--font-size--medium, 1rem);
+	line-height: var(--line-height-body, 1.6);
+	color: var(--color-dark);
+
+	&__main {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-sm);
+		padding: var(--space-md);
+	}
+
+	&__title {
+		margin: 0;
+		font-family: var(--font-family-heading);
+		font-size: var(--wp--preset--font-size--h-3, 1.625rem);
+		line-height: var(--line-height-heading, 1.2);
+		color: var(--color-dark);
+	}
+
+	&__text {
+		margin: 0;
+		font-size: var(--wp--preset--font-size--small, 0.875rem);
+
+		a {
+			display: block;
+			margin-top: var(--space-xs);
+			color: var(--color-primary);
+		}
+	}
+
+	&__categories {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-sm);
+		padding-top: var(--space-sm);
+		border-top: 1px solid var(--color-gray-light);
+	}
+
+	&__actions {
+		display: flex;
+		align-items: center;
+		gap: var(--space-xs);
+		flex-wrap: wrap;
+	}
+
+	// --- Bottom bar variant ---
+	&--bottom {
+		top: auto;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		transform: none;
+		width: 100%;
+		max-width: 100%;
+		max-height: 80dvh;
+		overflow-y: auto;
+		border-radius: var(--radius-md) var(--radius-md) 0 0;
+		border-bottom: none;
+
+		.cookie-banner__categories {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			gap: var(--space-sm);
+			border-top: 1px solid var(--color-gray-light);
+			padding-top: var(--space-sm);
+
+			@media (width < 64rem) {
+				grid-template-columns: 1fr;
+			}
+		}
+
+		.cookie-banner__actions {
+			justify-content: flex-end;
+		}
+	}
+}
+
+// =============================================================
+// Floating reopen button
+// =============================================================
+
+.wpst-cookie-reopen {
+	position: fixed;
+	bottom: 1.5rem;
+	right: 1.5rem;
+
+	&--left {
+		right: auto;
+		left: 1.5rem;
+	}
+
+	z-index: 1088;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.5rem 1rem 0.5rem 0.75rem;
+	background-color: var(--color-dark);
+	color: var(--color-white);
+	border: none;
+	border-radius: 2rem;
+	font-family: var(--font-family-body);
+	font-size: var(--wp--preset--font-size--small, 0.875rem);
+	cursor: pointer;
+	box-shadow: 0 0.125rem 0.625rem rgb(0 0 0 / 0.2);
+	transition:
+		opacity 0.2s ease,
+		transform 0.2s ease;
+
+	&:hover {
+		opacity: 0.85;
+		transform: translateY(-0.0625rem);
+	}
+
+	&:focus-visible {
+		outline: 0.125rem solid var(--color-primary);
+		outline-offset: 0.1875rem;
+	}
+
+	&__label {
+		line-height: 1;
+
+		@media (width < 64rem) {
+			display: none;
+		}
+	}
+
+	@media (width < 64rem) {
+		padding: 0.625rem;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		transition: none;
+	}
+}
+
+// =============================================================
+// Cookie button
+// =============================================================
+
+.cookie-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.5rem 1.25rem;
+	border: none;
+	border-radius: var(--radius-md);
+	cursor: pointer;
+	font-family: var(--font-family-body);
+	font-size: var(--wp--preset--font-size--small);
+	font-weight: var(--font-weight-bold);
+	line-height: 1.2;
+	text-decoration: none;
+	background-color: var(--color-primary);
+	color: var(--color-white);
+	transition: opacity 0.2s ease;
+
+	&:hover {
+		opacity: 0.85;
+	}
+
+	&:focus-visible {
+		outline: 0.125rem solid var(--color-primary);
+		outline-offset: 0.1875rem;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		transition: none;
+	}
+}
+
+// =============================================================
+// Cookie category row
+// =============================================================
+
+.cookie-category {
+	p {
+		margin: 0.25rem 0 0;
+		font-size: var(--wp--preset--font-size--small, 0.875rem);
+		opacity: 0.75;
+	}
+
+	&__label {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--space-xs);
+		cursor: pointer;
+		font-weight: var(--font-weight-bold, 700);
+		font-size: var(--wp--preset--font-size--medium, 1rem);
+
+		input[type="checkbox"] {
+			width: 1.125rem;
+			height: 1.125rem;
+			flex-shrink: 0;
+			cursor: pointer;
+			accent-color: var(--color-primary);
+
+			&:disabled {
+				opacity: 0.4;
+				cursor: not-allowed;
+			}
+		}
+	}
+}

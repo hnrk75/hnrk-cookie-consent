@@ -1,0 +1,34 @@
+// Plugin-level CSS custom property defaults.
+// Sits inside a named layer so any un-layered theme stylesheet wins.
+// Mirrors the values from wp-starter-theme/_root.scss.
+
+@layer wpst-cookie-defaults {
+	:root {
+		// --- Colors ---
+		--color-primary:    #34a0a4;
+		--color-dark:       #0d2b3e;
+		--color-white:      #fff;
+		--color-gray-light: #e2eef2;
+
+		// --- Spacing ---
+		--space-xs: clamp(0.375rem, 0.5vw, 0.625rem);
+		--space-sm: clamp(0.625rem, 1vw, 1.25rem);
+		--space-md: clamp(1.25rem, 2vw, 2.5rem);
+
+		// --- Borders ---
+		--radius-md: 0.5rem;
+
+		// --- Typography ---
+		--font-family-body:    system-ui, sans-serif;
+		--font-family-heading: system-ui, sans-serif;
+		--line-height-body:    1.6;
+		--line-height-heading: 1.2;
+		--font-weight-bold:    700;
+
+		// --- WP font size presets (used by the banner) ---
+		--wp--preset--font-size--small:  0.875rem;
+		--wp--preset--font-size--medium: 1rem;
+		--wp--preset--font-size--h-3:    1.625rem;
+	}
+
+}
