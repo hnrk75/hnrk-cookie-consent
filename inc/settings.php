@@ -312,7 +312,12 @@ function hnrk_cookie_field_banner_text() {
 		</div>
 		<div class="hnrk-cookie-admin__category-body">
 			<div class="hnrk-cookie-admin__category-preview">
-				<?php echo esc_html( $settings['banner_text'] ); ?>
+				<?php
+				echo wp_kses(
+					sprintf( $settings['banner_text'], '#' ),
+					array( 'a' => array( 'href' => array() ) )
+				);
+				?>
 			</div>
 			<textarea
 				name="hnrk_cookie_settings[banner_text]"

@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: HNRK Cookie Consent
- * Plugin URI:  https://github.com/hnrk75/wp-starter-theme
+ * Plugin URI:  https://github.com/hnrk75/hnrk-cookie-concent
  * Description: Cookiebanner med stöd för Google Consent Mode v2. Hanterar kategorierna Nödvändiga, Analys, Funktionella och Marknadsföring.
  * Version:     1.0.0
  * Author:      Henrik Pettersson
@@ -16,6 +16,8 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+define( 'HNRK_COOKIE_VERSION', HNRK_COOKIE_VERSION );
 
 require_once plugin_dir_path( __FILE__ ) . 'inc/settings.php';
 
@@ -39,14 +41,14 @@ function hnrk_cookie_enqueue() {
 		'hnrk-cookie-consent',
 		plugin_dir_url( __FILE__ ) . 'assets/css/cookie-banner.css',
 		array(),
-		'1.0.0'
+		HNRK_COOKIE_VERSION
 	);
 
 	wp_enqueue_script(
 		'hnrk-cookie-consent',
 		plugin_dir_url( __FILE__ ) . 'assets/js/consent.js',
 		array(),
-		'1.0.0',
+		HNRK_COOKIE_VERSION,
 		array(
 			'in_footer' => true,
 			'strategy'  => 'defer',
@@ -91,14 +93,14 @@ function hnrk_cookie_admin_assets( $hook ) {
 		'hnrk-cookie-admin',
 		plugin_dir_url( __FILE__ ) . 'assets/css/admin.css',
 		array(),
-		'1.0.0'
+		HNRK_COOKIE_VERSION
 	);
 
 	wp_enqueue_script(
 		'hnrk-cookie-admin',
 		plugin_dir_url( __FILE__ ) . 'assets/js/admin.js',
 		array(),
-		'1.0.0',
+		HNRK_COOKIE_VERSION,
 		true
 	);
 }
