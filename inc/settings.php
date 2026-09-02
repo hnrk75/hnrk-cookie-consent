@@ -155,18 +155,18 @@ add_action( 'admin_init', 'hnrk_cookie_register_settings' );
  */
 function hnrk_cookie_default_settings() {
 	return array(
-		'cookie_page_url'        => home_url( '/cookies/' ),
-		'cookie_days'            => 365,
-		'banner_title'           => 'Vi värnar om din integritet',
-		'banner_text'            => 'Vi använder cookies för att förbättra din upplevelse, visa anpassat innehåll och analysera vår trafik. Genom att klicka på "Acceptera alla" samtycker du till vår användning av cookies. <a href="%s">Läs om cookies</a>',
-		'enable_analytics'       => true,
-		'enable_functional'      => false,
-		'enable_marketing'       => false,
-		'enable_thirdparty'      => false,
-		'necessary_description'  => 'Krävs för att webbplatsen ska fungera korrekt. Dessa cookies lagrar inga personuppgifter.',
-		'analytics_description'  => 'Hjälper oss förstå hur besökare interagerar med webbplatsen — antal besökare, avvisningsfrekvens, trafikkälla m.m.',
-		'functional_description' => 'Möjliggör förbättrad funktionalitet som sparade inställningar, språkval eller inbäddat innehåll.',
-		'marketing_description'  => 'Används för personanpassad annonsering och spårning via tredjepartstjänster som Google Ads och Meta.',
+		'cookie_page_url'         => home_url( '/cookies/' ),
+		'cookie_days'             => 365,
+		'banner_title'            => 'Vi värnar om din integritet',
+		'banner_text'             => 'Vi använder cookies för att förbättra din upplevelse, visa anpassat innehåll och analysera vår trafik. Genom att klicka på "Acceptera alla" samtycker du till vår användning av cookies. <a href="%s">Läs om cookies</a>',
+		'enable_analytics'        => true,
+		'enable_functional'       => false,
+		'enable_marketing'        => false,
+		'enable_thirdparty'       => false,
+		'necessary_description'   => 'Krävs för att webbplatsen ska fungera korrekt. Dessa cookies lagrar inga personuppgifter.',
+		'analytics_description'   => 'Hjälper oss förstå hur besökare interagerar med webbplatsen — antal besökare, avvisningsfrekvens, trafikkälla m.m.',
+		'functional_description'  => 'Möjliggör förbättrad funktionalitet som sparade inställningar, språkval eller inbäddat innehåll.',
+		'marketing_description'   => 'Används för personanpassad annonsering och spårning via tredjepartstjänster som Google Ads och Meta.',
 		'thirdparty_description'  => 'Cookies från inbäddade tjänster som YouTube, Vimeo eller Google Maps.',
 		'banner_position'         => 'modal',
 		'manage_cookies_trigger'  => 'none',
@@ -220,7 +220,7 @@ function hnrk_cookie_sanitize_settings( $input ) {
 	}
 
 	if ( isset( $input['cookie_days'] ) ) {
-		$days = absint( $input['cookie_days'] );
+		$days                 = absint( $input['cookie_days'] );
 		$clean['cookie_days'] = ( $days > 0 && $days <= 3650 ) ? $days : 365;
 	}
 
@@ -269,6 +269,7 @@ function hnrk_cookie_sanitize_settings( $input ) {
 // Field callbacks
 // ------------------------------------------------------------
 
+/** Renders the banner title field. */
 function hnrk_cookie_field_banner_title() {
 	$settings = hnrk_cookie_get_settings();
 	?>
@@ -298,13 +299,17 @@ function hnrk_cookie_field_banner_title() {
 	<?php
 }
 
+/** Renders the banner intro text field. */
 function hnrk_cookie_field_banner_text() {
 	$settings = hnrk_cookie_get_settings();
 	?>
 	<div class="hnrk-cookie-admin__category">
 		<div class="hnrk-cookie-admin__category-header">
 			<p class="hnrk-cookie-admin__hint">
-				<?php esc_html_e( 'Introduktionstexten i bannern. Använd %s som platshållare där länken till cookiepolicysidan infogas.', 'hnrk-cookie-consent' ); ?>
+				<?php
+				/* translators: %s is replaced with the cookie policy page URL. */
+				esc_html_e( 'Introduktionstexten i bannern. Använd %s som platshållare där länken till cookiepolicysidan infogas.', 'hnrk-cookie-consent' );
+				?>
 			</p>
 			<button type="button" class="hnrk-cookie-admin__edit-link" aria-expanded="false" aria-controls="banner_text_editor">
 				<?php esc_html_e( 'Redigera', 'hnrk-cookie-consent' ); ?>
@@ -331,13 +336,17 @@ function hnrk_cookie_field_banner_text() {
 	<?php
 }
 
+/** Renders the cookie page URL field. */
 function hnrk_cookie_field_url() {
 	$settings = hnrk_cookie_get_settings();
 	?>
 	<div class="hnrk-cookie-admin__category">
 		<div class="hnrk-cookie-admin__category-header">
 			<p class="hnrk-cookie-admin__hint">
-				<?php esc_html_e( 'Länk som infogas i bannertexten via %s. Lämna tomt för standardsökvägen /cookies/.', 'hnrk-cookie-consent' ); ?>
+				<?php
+				/* translators: %s is replaced with the placeholder text in the banner text field. */
+				esc_html_e( 'Länk som infogas i bannertexten via %s. Lämna tomt för standardsökvägen /cookies/.', 'hnrk-cookie-consent' );
+				?>
 			</p>
 			<button type="button" class="hnrk-cookie-admin__edit-link" aria-expanded="false" aria-controls="cookie_page_url_editor">
 				<?php esc_html_e( 'Redigera', 'hnrk-cookie-consent' ); ?>
@@ -361,6 +370,7 @@ function hnrk_cookie_field_url() {
 	<?php
 }
 
+/** Renders the banner position radio field. */
 function hnrk_cookie_field_banner_position() {
 	$settings = hnrk_cookie_get_settings();
 	$pos      = $settings['banner_position'];
@@ -395,6 +405,7 @@ function hnrk_cookie_field_banner_position() {
 	<?php
 }
 
+/** Renders the cookie lifetime field. */
 function hnrk_cookie_field_days() {
 	$settings = hnrk_cookie_get_settings();
 	?>
@@ -426,10 +437,12 @@ function hnrk_cookie_field_days() {
 	<?php
 }
 
+/** Outputs the categories section description. */
 function hnrk_cookie_section_categories_description() {
 	echo '<p>' . esc_html__( 'Nödvändiga visas alltid. Aktivera de kategorier webbplatsen faktiskt använder — övriga visas inte i bannern.', 'hnrk-cookie-consent' ) . '</p>';
 }
 
+/** Renders the necessary cookies description field. */
 function hnrk_cookie_field_necessary_description() {
 	$settings = hnrk_cookie_get_settings();
 	?>
@@ -458,6 +471,7 @@ function hnrk_cookie_field_necessary_description() {
 	<?php
 }
 
+/** Renders the analytics category field. */
 function hnrk_cookie_field_analytics() {
 	$settings = hnrk_cookie_get_settings();
 	?>
@@ -501,6 +515,7 @@ function hnrk_cookie_field_analytics() {
 	<?php
 }
 
+/** Renders the functional cookies category field. */
 function hnrk_cookie_field_functional() {
 	$settings = hnrk_cookie_get_settings();
 	?>
@@ -536,6 +551,7 @@ function hnrk_cookie_field_functional() {
 	<?php
 }
 
+/** Renders the marketing cookies category field. */
 function hnrk_cookie_field_marketing() {
 	$settings = hnrk_cookie_get_settings();
 	?>
@@ -571,6 +587,7 @@ function hnrk_cookie_field_marketing() {
 	<?php
 }
 
+/** Renders the third-party cookies category field. */
 function hnrk_cookie_field_thirdparty() {
 	$settings = hnrk_cookie_get_settings();
 	?>
@@ -606,6 +623,7 @@ function hnrk_cookie_field_thirdparty() {
 	<?php
 }
 
+/** Renders the reopen trigger field. */
 function hnrk_cookie_field_trigger() {
 	$settings = hnrk_cookie_get_settings();
 	$trigger  = $settings['manage_cookies_trigger'];

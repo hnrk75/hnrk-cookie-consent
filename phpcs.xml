@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<ruleset name="HNRK Cookie Consent">
+	<description>WordPress Coding Standards for HNRK Cookie Consent</description>
+
+	<file>hnrk-cookie-consent.php</file>
+	<file>uninstall.php</file>
+	<file>inc/</file>
+	<file>templates/</file>
+
+	<arg name="basepath" value="."/>
+	<arg name="colors"/>
+	<arg value="sp"/>
+	<arg name="extensions" value="php"/>
+
+	<rule ref="WordPress">
+		<exclude name="WordPress.Files.FileName"/>
+	</rule>
+
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array">
+				<element value="hnrk-cookie-consent"/>
+			</property>
+		</properties>
+	</rule>
+
+	<config name="minimum_supported_wp_version" value="6.4"/>
+</ruleset>

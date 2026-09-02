@@ -10,10 +10,17 @@
     "dev": "gulp",
     "build": "cross-env NODE_ENV=production gulp build",
     "lint:css": "stylelint \"assets/scss/**/*.scss\"",
-    "lint:css:fix": "stylelint \"assets/scss/**/*.scss\" --fix"
+    "lint:css:fix": "stylelint \"assets/scss/**/*.scss\" --fix",
+    "lint:js": "eslint assets/js/",
+    "lint:js:fix": "eslint assets/js/ --fix",
+    "lint:php": "composer run lint:php",
+    "lint": "npm run lint:css && npm run lint:js && npm run lint:php"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "cross-env": "^7.0.3",
+    "eslint": "^10.9.1",
+    "globals": "^17.12.0",
     "gulp": "^5.0.0",
     "gulp-autoprefixer": "^9.0.0",
     "gulp-sass": "^5.1.0",

@@ -11,13 +11,15 @@
  * Text Domain: hnrk-cookie-consent
  * Requires at least: 6.4
  * Requires PHP: 8.1
+ *
+ * @package HNRK_Cookie_Consent
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'HNRK_COOKIE_VERSION', HNRK_COOKIE_VERSION );
+define( 'HNRK_COOKIE_VERSION', '1.0.0' );
 
 require_once plugin_dir_path( __FILE__ ) . 'inc/settings.php';
 
@@ -60,11 +62,11 @@ function hnrk_cookie_enqueue() {
 		'hnrk-cookie-consent',
 		'hnrkCookieSettings',
 		array(
-			'cookieDays'        => (int) $settings['cookie_days'],
-			'enableAnalytics'   => (bool) $settings['enable_analytics'],
-			'enableFunctional'  => (bool) $settings['enable_functional'],
-			'enableMarketing'   => (bool) $settings['enable_marketing'],
-			'enableThirdparty'  => (bool) $settings['enable_thirdparty'],
+			'cookieDays'       => (int) $settings['cookie_days'],
+			'enableAnalytics'  => (bool) $settings['enable_analytics'],
+			'enableFunctional' => (bool) $settings['enable_functional'],
+			'enableMarketing'  => (bool) $settings['enable_marketing'],
+			'enableThirdparty' => (bool) $settings['enable_thirdparty'],
 		)
 	);
 }
@@ -107,8 +109,11 @@ function hnrk_cookie_admin_assets( $hook ) {
 add_action( 'admin_enqueue_scripts', 'hnrk_cookie_admin_assets' );
 
 /**
- * Shortcode [hnrk_manage_cookies text="Hantera cookies"]
+ * Shortcode [hnrk_manage_cookies text="Hantera cookies"].
  * Outputs a link that reopens the consent banner.
+ *
+ * @param array $atts Shortcode attributes.
+ * @return string
  */
 function hnrk_cookie_manage_shortcode( $atts ) {
 	$atts = shortcode_atts(

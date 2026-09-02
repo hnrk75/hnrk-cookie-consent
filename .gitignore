@@ -1,1 +1,15 @@
+# Dependencies
 node_modules/
+vendor/
+
+# macOS
+.DS_Store
+
+# Editor
+.idea/
+.vscode/
+*.code-workspace
+
+# Build artifacts (om du väljer att inte committa kompilerat)
+# assets/css/*.css
+# assets/js/*.min.js
