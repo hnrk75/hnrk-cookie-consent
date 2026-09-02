@@ -21,7 +21,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 define( 'HNRK_COOKIE_VERSION', '1.0.0' );
 
+require_once plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
 require_once plugin_dir_path( __FILE__ ) . 'inc/settings.php';
+
+add_action(
+	'init',
+	function () {
+		$update_checker = \YahnisElsts\PluginUpdateChecker\v5\PucFactory::buildUpdateChecker(
+			'https://github.com/hnrk75/hnrk-cookie-concent',
+			__FILE__,
+			'hnrk-cookie-consent'
+		);
+		$update_checker->setBranch( 'main' );
+	}
+);
 
 /**
  * Load plugin text domain for translations.

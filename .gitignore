@@ -1,6 +1,12 @@
 # Dependencies
 node_modules/
-vendor/
+
+# Vendor — tracked so GitHub releases are self-contained
+# Only exclude dev-only tools
+vendor/squizlabs/
+vendor/wp-coding-standards/
+vendor/dealerdirect/
+vendor/phpcsstandards/
 
 # macOS
 .DS_Store
