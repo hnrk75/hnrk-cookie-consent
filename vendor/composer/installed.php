@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
-        'name' => 'hnrk/cookie-consent',
+        'name' => 'hnrk75/hnrk-cookie-consent',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'd30330f8306337f3965b656723338e1b7c99d2aa',
+        'reference' => '1e2028dd13e6a9d49ad0a40f1005924fc943b150',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -19,10 +19,10 @@
             'aliases' => array(),
             'dev_requirement' => true,
         ),
-        'hnrk/cookie-consent' => array(
+        'hnrk75/hnrk-cookie-consent' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'd30330f8306337f3965b656723338e1b7c99d2aa',
+            'reference' => '1e2028dd13e6a9d49ad0a40f1005924fc943b150',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
