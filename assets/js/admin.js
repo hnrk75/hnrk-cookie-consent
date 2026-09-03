@@ -31,21 +31,21 @@ document.addEventListener('DOMContentLoaded', () => {
 					if (editor.tagName === 'TEXTAREA' || editor.type === 'text' || editor.type === 'url') {
 						preview.textContent = val;
 					} else if (editor.type === 'number') {
-						preview.textContent = val + ' dagar';
+						preview.textContent = val + ' days';
 					}
 				}
 				editor.setAttribute('hidden', '');
 				hints.forEach((h) => h.setAttribute('hidden', ''));
 				if (preview) preview.removeAttribute('hidden');
 				btn.setAttribute('aria-expanded', 'false');
-				btn.textContent = 'Redigera';
+				btn.textContent = 'Edit';
 			} else {
 				if (preview) preview.setAttribute('hidden', '');
 				editor.removeAttribute('hidden');
 				hints.forEach((h) => h.removeAttribute('hidden'));
 				editor.focus();
 				btn.setAttribute('aria-expanded', 'true');
-				btn.textContent = 'Stäng';
+				btn.textContent = 'Close';
 			}
 		});
 	});

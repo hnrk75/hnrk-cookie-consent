@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin Name: HNRK Cookie Consent
- * Plugin URI:  https://github.com/hnrk75/hnrk-cookie-concent
- * Description: Cookiebanner med stöd för Google Consent Mode v2. Hanterar kategorierna Nödvändiga, Analys, Funktionella och Marknadsföring.
+ * Plugin URI:  https://github.com/hnrk75/hnrk-cookie-consent
+ * Description: Cookie consent banner with support for Google Consent Mode v2. Manages the categories Necessary, Analytics, Functional and Marketing.
  * Version:     1.0.2
  * Author:      Henrik Pettersson
  * Author URI:  https://github.com/hnrk75
@@ -23,18 +23,6 @@ define( 'HNRK_COOKIE_VERSION', get_file_data( __FILE__, array( 'Version' => 'Ver
 
 require_once plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
 require_once plugin_dir_path( __FILE__ ) . 'inc/settings.php';
-
-add_action(
-	'init',
-	function () {
-		$update_checker = \YahnisElsts\PluginUpdateChecker\v5\PucFactory::buildUpdateChecker(
-			'https://github.com/hnrk75/hnrk-cookie-concent',
-			__FILE__,
-			'hnrk-cookie-consent'
-		);
-		$update_checker->setBranch( 'main' );
-	}
-);
 
 /**
  * Load plugin text domain for translations.

@@ -45,14 +45,14 @@ $banner_class    = 'bottom' === $settings['banner_position'] ? 'cookie-banner co
 			<div class="cookie-category">
 				<label class="cookie-category__label">
 					<span class="cookie-category__title">
-						<?php esc_html_e( 'Nödvändiga', 'hnrk-cookie-consent' ); ?>
+						<?php esc_html_e( 'Necessary', 'hnrk-cookie-consent' ); ?>
 					</span>
 					<input
 						type="checkbox"
 						data-consent-toggle="necessary"
 						checked
 						disabled
-						aria-label="<?php esc_attr_e( 'Nödvändiga cookies, alltid aktiva', 'hnrk-cookie-consent' ); ?>"
+						aria-label="<?php esc_attr_e( 'Necessary cookies, always active', 'hnrk-cookie-consent' ); ?>"
 						aria-describedby="desc-necessary"
 					>
 				</label>
@@ -63,7 +63,7 @@ $banner_class    = 'bottom' === $settings['banner_position'] ? 'cookie-banner co
 			<div class="cookie-category">
 				<label class="cookie-category__label">
 					<span class="cookie-category__title">
-						<?php esc_html_e( 'Analys', 'hnrk-cookie-consent' ); ?>
+						<?php esc_html_e( 'Analytics', 'hnrk-cookie-consent' ); ?>
 					</span>
 					<input
 						type="checkbox"
@@ -79,7 +79,7 @@ $banner_class    = 'bottom' === $settings['banner_position'] ? 'cookie-banner co
 			<div class="cookie-category">
 				<label class="cookie-category__label">
 					<span class="cookie-category__title">
-						<?php esc_html_e( 'Funktionella', 'hnrk-cookie-consent' ); ?>
+						<?php esc_html_e( 'Functional', 'hnrk-cookie-consent' ); ?>
 					</span>
 					<input
 						type="checkbox"
@@ -95,7 +95,7 @@ $banner_class    = 'bottom' === $settings['banner_position'] ? 'cookie-banner co
 			<div class="cookie-category">
 				<label class="cookie-category__label">
 					<span class="cookie-category__title">
-						<?php esc_html_e( 'Marknadsföring', 'hnrk-cookie-consent' ); ?>
+						<?php esc_html_e( 'Marketing', 'hnrk-cookie-consent' ); ?>
 					</span>
 					<input
 						type="checkbox"
@@ -111,7 +111,7 @@ $banner_class    = 'bottom' === $settings['banner_position'] ? 'cookie-banner co
 			<div class="cookie-category">
 				<label class="cookie-category__label">
 					<span class="cookie-category__title">
-						<?php esc_html_e( 'Tredjepartstjänster', 'hnrk-cookie-consent' ); ?>
+						<?php esc_html_e( 'Third-party services', 'hnrk-cookie-consent' ); ?>
 					</span>
 					<input
 						type="checkbox"
@@ -127,13 +127,13 @@ $banner_class    = 'bottom' === $settings['banner_position'] ? 'cookie-banner co
 
 		<div class="cookie-banner__actions">
 			<button type="button" class="cookie-btn" data-consent-reject>
-				<?php esc_html_e( 'Avvisa alla', 'hnrk-cookie-consent' ); ?>
+				<?php esc_html_e( 'Reject all', 'hnrk-cookie-consent' ); ?>
 			</button>
 			<button type="button" class="cookie-btn" data-consent-save>
-				<?php esc_html_e( 'Spara inställningar', 'hnrk-cookie-consent' ); ?>
+				<?php esc_html_e( 'Save settings', 'hnrk-cookie-consent' ); ?>
 			</button>
 			<button type="button" class="cookie-btn" data-consent-accept>
-				<?php esc_html_e( 'Acceptera alla', 'hnrk-cookie-consent' ); ?>
+				<?php esc_html_e( 'Accept all', 'hnrk-cookie-consent' ); ?>
 			</button>
 		</div>
 	</div>
