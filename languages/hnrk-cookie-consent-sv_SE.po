@@ -1,0 +1,169 @@
+# Swedish translation for HNRK Cookie Consent
+# Copyright (C) 2024 Henrik Pettersson
+# This file is distributed under the same license as the HNRK Cookie Consent plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: HNRK Cookie Consent 1.0.2\n"
+"Report-Msgid-Bugs-To: https://github.com/hnrk75/hnrk-cookie-consent\n"
+"POT-Creation-Date: 2024-01-01 00:00+0000\n"
+"PO-Revision-Date: 2024-01-01 00:00+0000\n"
+"Last-Translator: Henrik Pettersson\n"
+"Language-Team: Swedish\n"
+"Language: sv_SE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Cookie consent banner with support for Google Consent Mode v2. Manages the categories Necessary, Analytics, Functional and Marketing."
+msgstr "Cookiebanner med stöd för Google Consent Mode v2. Hanterar kategorierna Nödvändiga, Analys, Funktionella och Marknadsföring."
+
+msgid "Banner title"
+msgstr "Bannerns rubrik"
+
+msgid "Banner intro text"
+msgstr "Bannerns introduktionstext"
+
+msgid "Cookie policy page URL"
+msgstr "URL till cookiepolicysida"
+
+msgid "Cookie lifetime (days)"
+msgstr "Cookiens giltighetstid (dagar)"
+
+msgid "Banner position"
+msgstr "Bannerns position"
+
+msgid "Necessary"
+msgstr "Nödvändiga"
+
+msgid "Analytics / Statistics"
+msgstr "Analys / Statistik"
+
+msgid "Functional"
+msgstr "Funktionella"
+
+msgid "Marketing"
+msgstr "Marknadsföring"
+
+msgid "Third-party services"
+msgstr "Tredjepartstjänster"
+
+msgid "Reopen banner"
+msgstr "Återöppna banner"
+
+msgid "The heading displayed at the top of the cookie banner."
+msgstr "Rubriken som visas överst i cookiebannern."
+
+msgid "Edit"
+msgstr "Redigera"
+
+msgid "The intro text in the banner. Use %s as a placeholder where the link to the cookie policy page is inserted."
+msgstr "Introduktionstexten i bannern. Använd %s som platshållare där länken till cookiepolicysidan infogas."
+
+msgid "Link inserted into the banner text via %s. Leave empty to use the default path /cookies/."
+msgstr "Länk som infogas i bannertexten via %s. Lämna tomt för standardsökvägen /cookies/."
+
+msgid "Modal is displayed centred on the page with a dark overlay. Strip is displayed along the bottom of the page without an overlay."
+msgstr "Modal visas centrerat på sidan med mörk overlay. Remsa visas längs sidans nederkant utan overlay."
+
+msgid "Modal (centred)"
+msgstr "Modal (centrerad)"
+
+msgid "Strip (bottom)"
+msgstr "Remsa (nederkant)"
+
+msgid "How long the visitor's consent choice is stored. Default: 365 days (1 year)."
+msgstr "Hur länge besökarens samtyckesval sparas. Standard: 365 dagar (1 år)."
+
+msgid "days"
+msgstr "dagar"
+
+msgid "Necessary cookies are always shown. Enable the categories your site actually uses — others will not appear in the banner."
+msgstr "Nödvändiga visas alltid. Aktivera de kategorier webbplatsen faktiskt använder — övriga visas inte i bannern."
+
+msgid "Always active"
+msgstr "Alltid aktiv"
+
+msgid "Edit info"
+msgstr "Redigera info"
+
+msgid "Show category"
+msgstr "Visa kategori"
+
+msgid "None"
+msgstr "Ingen"
+
+msgid "Floating button"
+msgstr "Flytande knapp"
+
+msgid "A small button is shown in the corner of the page so visitors can reopen their cookie settings. The button label is optional — default is \"Manage cookies\"."
+msgstr "En liten knapp visas i sidans nedre hörn så att cookieinställningarna kan öppna igen. Texten på knappen är valfri — standard är \"Hantera cookies\"."
+
+msgid "Button label"
+msgstr "Knapptext"
+
+msgid "Manage cookies"
+msgstr "Hantera cookies"
+
+msgid "Right"
+msgstr "Höger"
+
+msgid "Left"
+msgstr "Vänster"
+
+msgid "Place a link anywhere on the site — e.g. on the privacy policy page:"
+msgstr "Lägg en länk var som helst på webbplatsen — t.ex. på integritetssidan:"
+
+msgid "Default:"
+msgstr "Standard:"
+
+msgid "Custom text:"
+msgstr "Anpassad text:"
+
+msgid "Cookie Consent"
+msgstr "Cookiesamtycke"
+
+msgid "Banner"
+msgstr "Bannern"
+
+msgid "Categories"
+msgstr "Kategorier"
+
+msgid "Choose how visitors can reopen the banner after making their choice."
+msgstr "Välj hur besökare kan öppna bannern igen efter att ha gjort sitt val."
+
+msgid "Save settings"
+msgstr "Spara inställningar"
+
+msgid "Necessary cookies, always active"
+msgstr "Nödvändiga cookies, alltid aktiva"
+
+msgid "Analytics"
+msgstr "Analys"
+
+msgid "Reject all"
+msgstr "Avvisa alla"
+
+msgid "Accept all"
+msgstr "Acceptera alla"
+
+msgid "We value your privacy"
+msgstr "Vi värnar om din integritet"
+
+msgid "We use cookies to improve your experience, show personalised content and analyse our traffic. By clicking \"Accept all\" you consent to our use of cookies. <a href=\"%s\">Read about cookies</a>"
+msgstr "Vi använder cookies för att förbättra din upplevelse, visa anpassat innehåll och analysera vår trafik. Genom att klicka på \"Acceptera alla\" samtycker du till vår användning av cookies. <a href=\"%s\">Läs om cookies</a>"
+
+msgid "Required for the website to function properly. These cookies do not store any personal data."
+msgstr "Krävs för att webbplatsen ska fungera korrekt. Dessa cookies lagrar inga personuppgifter."
+
+msgid "Help us understand how visitors interact with the website — number of visitors, bounce rate, traffic source, etc."
+msgstr "Hjälper oss förstå hur besökare interagerar med webbplatsen — antal besökare, avvisningsfrekvens, trafikkälla m.m."
+
+msgid "Enable enhanced functionality such as saved preferences, language selection or embedded content."
+msgstr "Möjliggör förbättrad funktionalitet som sparade inställningar, språkval eller inbäddat innehåll."
+
+msgid "Used for personalised advertising and tracking via third-party services such as Google Ads and Meta."
+msgstr "Används för personanpassad annonsering och spårning via tredjepartstjänster som Google Ads och Meta."
+
+msgid "Cookies from embedded services such as YouTube, Vimeo or Google Maps."
+msgstr "Cookies från inbäddade tjänster som YouTube, Vimeo eller Google Maps."
