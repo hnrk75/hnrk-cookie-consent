@@ -3,7 +3,7 @@
  * Plugin Name: HNRK Cookie Consent
  * Plugin URI:  https://github.com/hnrk75/hnrk-cookie-consent
  * Description: Cookie consent banner with support for Google Consent Mode v2. Manages the categories Necessary, Analytics, Functional and Marketing.
- * Version:     1.0.5
+ * Version:     1.0.6
  * Author:      Henrik Pettersson
  * Author URI:  https://github.com/hnrk75
  * License:     GPL-2.0-or-later
@@ -109,15 +109,16 @@ function hnrk_cookie_admin_assets( $hook ) {
 add_action( 'admin_enqueue_scripts', 'hnrk_cookie_admin_assets' );
 
 /**
- * Shortcode [hnrk_manage_cookies text="Hantera cookies"].
- * Outputs a link that reopens the consent banner.
+ * Shortcode [hnrk_manage_cookies text="Cookie settings"].
+ * Outputs a link that reopens the consent banner. Without `text`, the "Manage cookies"
+ * label from the settings is used (in the site's language unless changed).
  *
  * @param array $atts Shortcode attributes.
  * @return string
  */
 function hnrk_cookie_manage_shortcode( $atts ) {
 	$atts = shortcode_atts(
-		array( 'text' => __( 'Hantera cookies', 'hnrk-cookie-consent' ) ),
+		array( 'text' => hnrk_cookie_get_settings()['manage_cookies_label'] ),
 		$atts,
 		'hnrk_manage_cookies'
 	);
@@ -133,9 +134,7 @@ function hnrk_cookie_floating_btn() {
 	if ( 'floating' !== $settings['manage_cookies_trigger'] ) {
 		return;
 	}
-	$label    = ! empty( $settings['manage_cookies_label'] )
-		? $settings['manage_cookies_label']
-		: __( 'Hantera cookies', 'hnrk-cookie-consent' );
+	$label    = $settings['manage_cookies_label'];
 	$position = isset( $settings['manage_cookies_position'] ) && 'left' === $settings['manage_cookies_position']
 		? 'hnrk-cookie-reopen hnrk-cookie-reopen--left'
 		: 'hnrk-cookie-reopen';

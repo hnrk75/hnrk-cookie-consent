@@ -14,7 +14,8 @@ Cookie consent banner for WordPress with support for Google Consent Mode v2.
 - A floating **Manage cookies** button lets visitors change their choice.
 - Settings under **Settings → Cookie Consent**: banner texts, cookie policy page,
   cookie lifetime, banner position, categories and third-party services.
-- Translated to Swedish (`languages/`).
+- Translated to Swedish (`languages/`). The default texts follow the site's language as
+  long as they are not changed; a text you edit in the settings is kept as written.
 
 ---
 

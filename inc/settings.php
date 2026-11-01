@@ -149,43 +149,132 @@ add_action( 'admin_init', 'hnrk_cookie_register_settings' );
 // ------------------------------------------------------------
 
 /**
- * Returns the default settings array.
+ * Default texts, as [ English source, translation in the current language ].
  *
- * @return array
+ * A text that is left as the default is stored empty, so it follows the site's language.
+ * Only texts an admin has changed are stored, and those stay as written.
+ *
+ * @return array<string, array{0: string, 1: string}>
  */
-function hnrk_cookie_default_settings() {
+function hnrk_cookie_default_texts() {
 	return array(
-		'cookie_page_url'         => home_url( '/cookies/' ),
-		'cookie_days'             => 365,
-		'banner_title'            => 'We value your privacy',
-		'banner_text'             => 'We use cookies to improve your experience, show personalised content and analyse our traffic. By clicking "Accept all" you consent to our use of cookies. <a href="%s">Read about cookies</a>',
-		'enable_analytics'        => true,
-		'enable_functional'       => false,
-		'enable_marketing'        => false,
-		'enable_thirdparty'       => false,
-		'necessary_description'   => 'Required for the website to function properly. These cookies do not store any personal data.',
-		'analytics_description'   => 'Help us understand how visitors interact with the website — number of visitors, bounce rate, traffic source, etc.',
-		'functional_description'  => 'Enable enhanced functionality such as saved preferences, language selection or embedded content.',
-		'marketing_description'   => 'Used for personalised advertising and tracking via third-party services such as Google Ads and Meta.',
-		'thirdparty_description'  => 'Cookies from embedded services such as YouTube, Vimeo or Google Maps.',
-		'banner_position'         => 'modal',
-		'manage_cookies_trigger'  => 'none',
-		'manage_cookies_label'    => 'Manage cookies',
-		'manage_cookies_position' => 'right',
+		'banner_title'           => array(
+			'We value your privacy',
+			__( 'We value your privacy', 'hnrk-cookie-consent' ),
+		),
+		'banner_text'            => array(
+			'We use cookies to improve your experience, show personalised content and analyse our traffic. By clicking "Accept all" you consent to our use of cookies. <a href="%s">Read about cookies</a>',
+			/* translators: %s: URL of the cookie policy page. */
+			__( 'We use cookies to improve your experience, show personalised content and analyse our traffic. By clicking "Accept all" you consent to our use of cookies. <a href="%s">Read about cookies</a>', 'hnrk-cookie-consent' ),
+		),
+		'necessary_description'  => array(
+			'Required for the website to function properly. These cookies do not store any personal data.',
+			__( 'Required for the website to function properly. These cookies do not store any personal data.', 'hnrk-cookie-consent' ),
+		),
+		'analytics_description'  => array(
+			'Help us understand how visitors interact with the website — number of visitors, bounce rate, traffic source, etc.',
+			__( 'Help us understand how visitors interact with the website — number of visitors, bounce rate, traffic source, etc.', 'hnrk-cookie-consent' ),
+		),
+		'functional_description' => array(
+			'Enable enhanced functionality such as saved preferences, language selection or embedded content.',
+			__( 'Enable enhanced functionality such as saved preferences, language selection or embedded content.', 'hnrk-cookie-consent' ),
+		),
+		'marketing_description'  => array(
+			'Used for personalised advertising and tracking via third-party services such as Google Ads and Meta.',
+			__( 'Used for personalised advertising and tracking via third-party services such as Google Ads and Meta.', 'hnrk-cookie-consent' ),
+		),
+		'thirdparty_description' => array(
+			'Cookies from embedded services such as YouTube, Vimeo or Google Maps.',
+			__( 'Cookies from embedded services such as YouTube, Vimeo or Google Maps.', 'hnrk-cookie-consent' ),
+		),
+		'manage_cookies_label'   => array(
+			'Manage cookies',
+			__( 'Manage cookies', 'hnrk-cookie-consent' ),
+		),
 	);
 }
 
 /**
- * Returns the saved settings merged with defaults.
+ * Returns the default settings array, with texts in the current language.
+ *
+ * @return array
+ */
+function hnrk_cookie_default_settings() {
+	return array_merge(
+		array(
+			'cookie_page_url'         => home_url( '/cookies/' ),
+			'cookie_days'             => 365,
+			'enable_analytics'        => true,
+			'enable_functional'       => false,
+			'enable_marketing'        => false,
+			'enable_thirdparty'       => false,
+			'banner_position'         => 'modal',
+			'manage_cookies_trigger'  => 'none',
+			'manage_cookies_position' => 'right',
+		),
+		array_map(
+			function ( $text ) {
+				return $text[1];
+			},
+			hnrk_cookie_default_texts()
+		)
+	);
+}
+
+/**
+ * Returns the saved settings merged with defaults. Empty texts are replaced by the
+ * default text in the current language.
  *
  * @return array
  */
 function hnrk_cookie_get_settings() {
-	return wp_parse_args(
-		(array) get_option( 'hnrk_cookie_settings', array() ),
-		hnrk_cookie_default_settings()
-	);
+	$defaults = hnrk_cookie_default_settings();
+	$settings = wp_parse_args( (array) get_option( 'hnrk_cookie_settings', array() ), $defaults );
+
+	foreach ( array_keys( hnrk_cookie_default_texts() ) as $key ) {
+		if ( '' === trim( (string) $settings[ $key ] ) ) {
+			$settings[ $key ] = $defaults[ $key ];
+		}
+	}
+
+	return $settings;
 }
+
+/**
+ * Empties every text that equals its default (English or the current translation),
+ * so it is not locked to one language when saved.
+ *
+ * @param array $settings Settings to store.
+ * @return array
+ */
+function hnrk_cookie_unlock_default_texts( $settings ) {
+	foreach ( hnrk_cookie_default_texts() as $key => $text ) {
+		if ( isset( $settings[ $key ] ) && in_array( trim( (string) $settings[ $key ] ), $text, true ) ) {
+			$settings[ $key ] = '';
+		}
+	}
+
+	return $settings;
+}
+
+/**
+ * Sites saved before 1.0.6 have the default texts stored in one language. Empty those
+ * that are unchanged defaults, so they follow the site's language again.
+ */
+function hnrk_cookie_migrate_default_texts() {
+	$stored = get_option( 'hnrk_cookie_settings' );
+
+	if ( ! is_array( $stored ) ) {
+		return;
+	}
+
+	$unlocked = hnrk_cookie_unlock_default_texts( $stored );
+
+	if ( $unlocked !== $stored ) {
+		update_option( 'hnrk_cookie_settings', $unlocked );
+	}
+}
+add_action( 'admin_init', 'hnrk_cookie_migrate_default_texts' );
 
 // ------------------------------------------------------------
 // Sanitisation
@@ -262,7 +351,7 @@ function hnrk_cookie_sanitize_settings( $input ) {
 		$clean['manage_cookies_position'] = $input['manage_cookies_position'];
 	}
 
-	return $clean;
+	return hnrk_cookie_unlock_default_texts( $clean );
 }
 
 // ------------------------------------------------------------
@@ -703,7 +792,7 @@ function hnrk_cookie_field_trigger() {
 		</p>
 		<p>
 			<?php esc_html_e( 'Custom text:', 'hnrk-cookie-consent' ); ?>
-			<code class="hnrk-cookie-admin__code">[hnrk_manage_cookies text="Hantera cookies"]</code>
+			<code class="hnrk-cookie-admin__code">[hnrk_manage_cookies text="Cookie settings"]</code>
 		</p>
 	</div>
 	<?php

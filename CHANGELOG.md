@@ -11,6 +11,13 @@ plugin uses [Semantic Versioning](https://semver.org/):
 
 ## [Unreleased]
 
+## [1.0.6] - 2026-11-01
+
+### Fixed
+- The default banner texts (title, text, category descriptions, "Manage cookies" label) did not follow the site's language: they were not translatable, and saving the settings stored them in one language. Defaults are now translated, and a text that is left as the default is stored empty so it follows the language. Texts an admin has changed are kept as written.
+- Sites saved with an earlier version are fixed automatically the next time an admin opens WP admin: stored texts that equal the default (in English or the admin's language) are emptied, so they follow the language again.
+- The `[hnrk_manage_cookies]` shortcode and the floating button used a hard-coded Swedish label as fallback. Both now use the "Manage cookies" label from the settings.
+
 ## [1.0.5] - 2026-11-01
 
 ### Added

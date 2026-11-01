@@ -1,169 +1,267 @@
-# Swedish translation for HNRK Cookie Consent
-# Copyright (C) 2024 Henrik Pettersson
-# This file is distributed under the same license as the HNRK Cookie Consent plugin.
 msgid ""
 msgstr ""
 "Project-Id-Version: HNRK Cookie Consent 1.0.2\n"
 "Report-Msgid-Bugs-To: https://github.com/hnrk75/hnrk-cookie-consent\n"
-"POT-Creation-Date: 2024-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-01-01 00:00+0000\n"
 "Last-Translator: Henrik Pettersson\n"
 "Language-Team: Swedish\n"
-"Language: sv_SE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2024-01-01 00:00+0000\n"
+"PO-Revision-Date: 2026-11-01T11:55:16+00:00\n"
+"Language: sv_SE\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#. Plugin Name of the plugin
+#: hnrk-cookie-consent.php:3
+msgid "HNRK Cookie Consent"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: hnrk-cookie-consent.php:4
+msgid "https://github.com/hnrk75/hnrk-cookie-consent"
+msgstr ""
+
+#. Description of the plugin
+#: hnrk-cookie-consent.php:5
 msgid "Cookie consent banner with support for Google Consent Mode v2. Manages the categories Necessary, Analytics, Functional and Marketing."
 msgstr "Cookiebanner med stöd för Google Consent Mode v2. Hanterar kategorierna Nödvändiga, Analys, Funktionella och Marknadsföring."
 
+#. Author of the plugin
+#: hnrk-cookie-consent.php:7
+msgid "Henrik Pettersson"
+msgstr ""
+
+#. Author URI of the plugin
+#: hnrk-cookie-consent.php:8
+msgid "https://github.com/hnrk75"
+msgstr ""
+
+#: inc/settings.php:43
 msgid "Banner title"
 msgstr "Bannerns rubrik"
 
+#: inc/settings.php:51
 msgid "Banner intro text"
 msgstr "Bannerns introduktionstext"
 
+#: inc/settings.php:59
 msgid "Cookie policy page URL"
 msgstr "URL till cookiepolicysida"
 
+#: inc/settings.php:67
 msgid "Cookie lifetime (days)"
 msgstr "Cookiens giltighetstid (dagar)"
 
+#: inc/settings.php:75
 msgid "Banner position"
 msgstr "Bannerns position"
 
+#: inc/settings.php:91
+#: templates/cookie-banner.php:48
 msgid "Necessary"
 msgstr "Nödvändiga"
 
+#: inc/settings.php:99
 msgid "Analytics / Statistics"
 msgstr "Analys / Statistik"
 
+#: inc/settings.php:107
+#: templates/cookie-banner.php:82
 msgid "Functional"
 msgstr "Funktionella"
 
+#: inc/settings.php:115
+#: templates/cookie-banner.php:98
 msgid "Marketing"
 msgstr "Marknadsföring"
 
+#: inc/settings.php:123
+#: templates/cookie-banner.php:114
 msgid "Third-party services"
 msgstr "Tredjepartstjänster"
 
+#: inc/settings.php:139
+#: inc/settings.php:852
 msgid "Reopen banner"
 msgstr "Återöppna banner"
 
-msgid "The heading displayed at the top of the cookie banner."
-msgstr "Rubriken som visas överst i cookiebannern."
-
-msgid "Edit"
-msgstr "Redigera"
-
-msgid "The intro text in the banner. Use %s as a placeholder where the link to the cookie policy page is inserted."
-msgstr "Introduktionstexten i bannern. Använd %s som platshållare där länken till cookiepolicysidan infogas."
-
-msgid "Link inserted into the banner text via %s. Leave empty to use the default path /cookies/."
-msgstr "Länk som infogas i bannertexten via %s. Lämna tomt för standardsökvägen /cookies/."
-
-msgid "Modal is displayed centred on the page with a dark overlay. Strip is displayed along the bottom of the page without an overlay."
-msgstr "Modal visas centrerat på sidan med mörk overlay. Remsa visas längs sidans nederkant utan overlay."
-
-msgid "Modal (centred)"
-msgstr "Modal (centrerad)"
-
-msgid "Strip (bottom)"
-msgstr "Remsa (nederkant)"
-
-msgid "How long the visitor's consent choice is stored. Default: 365 days (1 year)."
-msgstr "Hur länge besökarens samtyckesval sparas. Standard: 365 dagar (1 år)."
-
-msgid "days"
-msgstr "dagar"
-
-msgid "Necessary cookies are always shown. Enable the categories your site actually uses — others will not appear in the banner."
-msgstr "Nödvändiga visas alltid. Aktivera de kategorier webbplatsen faktiskt använder — övriga visas inte i bannern."
-
-msgid "Always active"
-msgstr "Alltid aktiv"
-
-msgid "Edit info"
-msgstr "Redigera info"
-
-msgid "Show category"
-msgstr "Visa kategori"
-
-msgid "None"
-msgstr "Ingen"
-
-msgid "Floating button"
-msgstr "Flytande knapp"
-
-msgid "A small button is shown in the corner of the page so visitors can reopen their cookie settings. The button label is optional — default is \"Manage cookies\"."
-msgstr "En liten knapp visas i sidans nedre hörn så att cookieinställningarna kan öppna igen. Texten på knappen är valfri — standard är \"Hantera cookies\"."
-
-msgid "Button label"
-msgstr "Knapptext"
-
-msgid "Manage cookies"
-msgstr "Hantera cookies"
-
-msgid "Right"
-msgstr "Höger"
-
-msgid "Left"
-msgstr "Vänster"
-
-msgid "Place a link anywhere on the site — e.g. on the privacy policy page:"
-msgstr "Lägg en länk var som helst på webbplatsen — t.ex. på integritetssidan:"
-
-msgid "Default:"
-msgstr "Standard:"
-
-msgid "Custom text:"
-msgstr "Anpassad text:"
-
-msgid "Cookie Consent"
-msgstr "Cookiesamtycke"
-
-msgid "Banner"
-msgstr "Bannern"
-
-msgid "Categories"
-msgstr "Kategorier"
-
-msgid "Choose how visitors can reopen the banner after making their choice."
-msgstr "Välj hur besökare kan öppna bannern igen efter att ha gjort sitt val."
-
-msgid "Save settings"
-msgstr "Spara inställningar"
-
-msgid "Necessary cookies, always active"
-msgstr "Nödvändiga cookies, alltid aktiva"
-
-msgid "Analytics"
-msgstr "Analys"
-
-msgid "Reject all"
-msgstr "Avvisa alla"
-
-msgid "Accept all"
-msgstr "Acceptera alla"
-
+#: inc/settings.php:163
 msgid "We value your privacy"
 msgstr "Vi värnar om din integritet"
 
+#. translators: %s: URL of the cookie policy page.
+#: inc/settings.php:168
+#, php-format
 msgid "We use cookies to improve your experience, show personalised content and analyse our traffic. By clicking \"Accept all\" you consent to our use of cookies. <a href=\"%s\">Read about cookies</a>"
 msgstr "Vi använder cookies för att förbättra din upplevelse, visa anpassat innehåll och analysera vår trafik. Genom att klicka på \"Acceptera alla\" samtycker du till vår användning av cookies. <a href=\"%s\">Läs om cookies</a>"
 
+#: inc/settings.php:172
 msgid "Required for the website to function properly. These cookies do not store any personal data."
 msgstr "Krävs för att webbplatsen ska fungera korrekt. Dessa cookies lagrar inga personuppgifter."
 
+#: inc/settings.php:176
 msgid "Help us understand how visitors interact with the website — number of visitors, bounce rate, traffic source, etc."
 msgstr "Hjälper oss förstå hur besökare interagerar med webbplatsen — antal besökare, avvisningsfrekvens, trafikkälla m.m."
 
+#: inc/settings.php:180
 msgid "Enable enhanced functionality such as saved preferences, language selection or embedded content."
 msgstr "Möjliggör förbättrad funktionalitet som sparade inställningar, språkval eller inbäddat innehåll."
 
+#: inc/settings.php:184
 msgid "Used for personalised advertising and tracking via third-party services such as Google Ads and Meta."
 msgstr "Används för personanpassad annonsering och spårning via tredjepartstjänster som Google Ads och Meta."
 
+#: inc/settings.php:188
 msgid "Cookies from embedded services such as YouTube, Vimeo or Google Maps."
 msgstr "Cookies från inbäddade tjänster som YouTube, Vimeo eller Google Maps."
+
+#: inc/settings.php:192
+#: inc/settings.php:758
+msgid "Manage cookies"
+msgstr "Hantera cookies"
+
+#: inc/settings.php:368
+msgid "The heading displayed at the top of the cookie banner."
+msgstr "Rubriken som visas överst i cookiebannern."
+
+#: inc/settings.php:371
+#: inc/settings.php:404
+#: inc/settings.php:441
+#: inc/settings.php:507
+msgid "Edit"
+msgstr "Redigera"
+
+#. translators: %s is replaced with the cookie policy page URL.
+#: inc/settings.php:400
+#, php-format
+msgid "The intro text in the banner. Use %s as a placeholder where the link to the cookie policy page is inserted."
+msgstr "Introduktionstexten i bannern. Använd %s som platshållare där länken till cookiepolicysidan infogas."
+
+#. translators: %s is replaced with the placeholder text in the banner text field.
+#: inc/settings.php:437
+#, php-format
+msgid "Link inserted into the banner text via %s. Leave empty to use the default path /cookies/."
+msgstr "Länk som infogas i bannertexten via %s. Lämna tomt för standardsökvägen /cookies/."
+
+#: inc/settings.php:470
+msgid "Modal is displayed centred on the page with a dark overlay. Strip is displayed along the bottom of the page without an overlay."
+msgstr "Modal visas centrerat på sidan med mörk overlay. Remsa visas längs sidans nederkant utan overlay."
+
+#: inc/settings.php:481
+msgid "Modal (centred)"
+msgstr "Modal (centrerad)"
+
+#: inc/settings.php:490
+msgid "Strip (bottom)"
+msgstr "Remsa (nederkant)"
+
+#: inc/settings.php:504
+msgid "How long the visitor's consent choice is stored. Default: 365 days (1 year)."
+msgstr "Hur länge besökarens samtyckesval sparas. Standard: 365 dagar (1 år)."
+
+#: inc/settings.php:512
+msgid "days"
+msgstr "dagar"
+
+#: inc/settings.php:531
+msgid "Necessary cookies are always shown. Enable the categories your site actually uses — others will not appear in the banner."
+msgstr "Nödvändiga visas alltid. Aktivera de kategorier webbplatsen faktiskt använder — övriga visas inte i bannern."
+
+#: inc/settings.php:541
+msgid "Always active"
+msgstr "Alltid aktiv"
+
+#: inc/settings.php:544
+#: inc/settings.php:586
+#: inc/settings.php:624
+#: inc/settings.php:660
+#: inc/settings.php:696
+msgid "Edit info"
+msgstr "Redigera info"
+
+#: inc/settings.php:577
+#: inc/settings.php:621
+#: inc/settings.php:657
+#: inc/settings.php:693
+msgid "Show category"
+msgstr "Visa kategori"
+
+#: inc/settings.php:729
+msgid "None"
+msgstr "Ingen"
+
+#: inc/settings.php:738
+#: inc/settings.php:744
+msgid "Floating button"
+msgstr "Flytande knapp"
+
+#: inc/settings.php:747
+msgid "A small button is shown in the corner of the page so visitors can reopen their cookie settings. The button label is optional — default is \"Manage cookies\"."
+msgstr "En liten knapp visas i sidans nedre hörn så att cookieinställningarna kan öppna igen. Texten på knappen är valfri — standard är \"Hantera cookies\"."
+
+#: inc/settings.php:750
+msgid "Button label"
+msgstr "Knapptext"
+
+#: inc/settings.php:768
+msgid "Right"
+msgstr "Höger"
+
+#: inc/settings.php:777
+msgid "Left"
+msgstr "Vänster"
+
+#: inc/settings.php:784
+msgid "Shortcode"
+msgstr ""
+
+#: inc/settings.php:787
+msgid "Place a link anywhere on the site — e.g. on the privacy policy page:"
+msgstr "Lägg en länk var som helst på webbplatsen — t.ex. på integritetssidan:"
+
+#: inc/settings.php:790
+msgid "Default:"
+msgstr "Standard:"
+
+#: inc/settings.php:794
+msgid "Custom text:"
+msgstr "Anpassad text:"
+
+#: inc/settings.php:810
+#: inc/settings.php:811
+msgid "Cookie Consent"
+msgstr "Cookiesamtycke"
+
+#: inc/settings.php:842
+msgid "Banner"
+msgstr "Bannern"
+
+#: inc/settings.php:847
+msgid "Categories"
+msgstr "Kategorier"
+
+#: inc/settings.php:854
+msgid "Choose how visitors can reopen the banner after making their choice."
+msgstr "Välj hur besökare kan öppna bannern igen efter att ha gjort sitt val."
+
+#: inc/settings.php:859
+#: templates/cookie-banner.php:133
+msgid "Save settings"
+msgstr "Spara inställningar"
+
+#: templates/cookie-banner.php:55
+msgid "Necessary cookies, always active"
+msgstr "Nödvändiga cookies, alltid aktiva"
+
+#: templates/cookie-banner.php:66
+msgid "Analytics"
+msgstr "Analys"
+
+#: templates/cookie-banner.php:130
+msgid "Reject all"
+msgstr "Avvisa alla"
+
+#: templates/cookie-banner.php:136
+msgid "Accept all"
+msgstr "Acceptera alla"
