@@ -9,17 +9,25 @@
 
 $settings        = hnrk_cookie_get_settings();
 $cookie_page_url = apply_filters( 'hnrk_cookie_page_url', $settings['cookie_page_url'] );
-$banner_class    = 'bottom' === $settings['banner_position'] ? 'cookie-banner cookie-banner--bottom' : 'cookie-banner';
+$is_bottom_bar   = 'bottom' === $settings['banner_position'];
+$banner_class    = $is_bottom_bar ? 'cookie-banner cookie-banner--bottom' : 'cookie-banner';
 ?>
 
 <div class="cookie-overlay" id="cookie-overlay" hidden aria-hidden="true"></div>
 
+<?php
+// The bottom bar does not block the page, so it is not a modal dialog.
+?>
 <div
 	class="<?php echo esc_attr( $banner_class ); ?>"
 	id="cookie-banner"
 	hidden
+	<?php if ( $is_bottom_bar ) : ?>
+	role="region"
+	<?php else : ?>
 	role="dialog"
 	aria-modal="true"
+	<?php endif; ?>
 	aria-labelledby="cookie-banner-title"
 	aria-describedby="cookie-banner-desc"
 >
@@ -30,12 +38,10 @@ $banner_class    = 'bottom' === $settings['banner_position'] ? 'cookie-banner co
 
 		<p class="cookie-banner__text" id="cookie-banner-desc">
 			<?php
-			printf(
-				wp_kses(
-					$settings['banner_text'],
-					array( 'a' => array( 'href' => array() ) )
-				),
-				esc_url( $cookie_page_url )
+			// Not printf: an admin's "%" would cause a fatal error.
+			echo wp_kses(
+				str_replace( '%s', esc_url( $cookie_page_url ), $settings['banner_text'] ),
+				array( 'a' => array( 'href' => array() ) )
 			);
 			?>
 		</p>

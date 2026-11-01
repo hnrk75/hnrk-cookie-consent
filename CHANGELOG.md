@@ -11,6 +11,28 @@ plugin uses [Semantic Versioning](https://semver.org/):
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-11-01
+
+Fixes from the first client site built on the starter template (svenssonsmetropol).
+
+### Added
+- Google Consent Mode v2 default: everything is denied in `<head>` (priority 1) before any Google tag loads, with `wait_for_update`; a returning visitor's choice is applied right away. `functionality_storage` and `personalization_storage` follow the Functional category. Filter `hnrk_cookie_consent_mode` turns the default off (e.g. when Consent Mode is set up in Google Tag Manager).
+- JavaScript API: the `hnrk:consent` event on `document` (on load and on every change) and `window.hnrkConsent` with `get()`, `has( category )` and `open()`.
+- Script blocking: `<script type="text/plain" data-consent="marketing">` runs only once its category is accepted.
+- Consent version: when the site turns a category on or off, visitors with an older choice are asked again.
+
+### Changed
+- The floating "Manage cookies" button is on by default, so visitors can always change or withdraw their consent (GDPR). Sites that saved the old default (`none`) get it turned on once, the first time an admin opens wp-admin after the update — unless they already offer another way to reopen the banner (the `[hnrk_manage_cookies]` shortcode or a `#manage-cookies` link in content or a menu).
+- The Analytics category is off by default.
+- The fallback `--color-primary` is `#2a8084` (4.65:1 against the white button text) instead of `#34a0a4` (3.1:1). Only affects sites whose theme does not set `--color-primary`.
+- The bottom bar banner is a `region`, not a modal dialog; reopened, the banner is a modal dialog.
+- The consent cookie is `Secure` on HTTPS. Declining removes marketing cookies (`_fbp`, `_fbc`, `_gcl_*`, `_uet*` …) as well as analytics cookies.
+- The admin script's texts ("Close", "… days") are translatable, and the "Edit info" buttons keep their label after being clicked.
+- README: settings are in their own **Cookie Consent** admin menu; new section on using consent in a theme.
+
+### Fixed
+- A `%` in the banner text (e.g. "100%") caused a fatal error on every page and on the settings page, because the text was used as a `printf()` format string.
+
 ## [1.0.6] - 2026-11-01
 
 ### Fixed

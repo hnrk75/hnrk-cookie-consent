@@ -5,7 +5,7 @@
 @layer hnrk-cookie-defaults {
 	:root {
 		// --- Colors ---
-		--color-primary:    #34a0a4;
+		--color-primary:    #2a8084; // 4.65:1 against the white button text (WCAG AA)
 		--color-dark:       #0d2b3e;
 		--color-white:      #fff;
 		--color-gray-light: #e2eef2;

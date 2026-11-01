@@ -149,10 +149,8 @@ add_action( 'admin_init', 'hnrk_cookie_register_settings' );
 // ------------------------------------------------------------
 
 /**
- * Default texts, as [ English source, translation in the current language ].
- *
- * A text that is left as the default is stored empty, so it follows the site's language.
- * Only texts an admin has changed are stored, and those stay as written.
+ * Default texts as [ English source, translation ]. Unchanged defaults are stored empty,
+ * so they follow the site's language.
  *
  * @return array<string, array{0: string, 1: string}>
  */
@@ -204,12 +202,13 @@ function hnrk_cookie_default_settings() {
 		array(
 			'cookie_page_url'         => home_url( '/cookies/' ),
 			'cookie_days'             => 365,
-			'enable_analytics'        => true,
+			'enable_analytics'        => false,
 			'enable_functional'       => false,
 			'enable_marketing'        => false,
 			'enable_thirdparty'       => false,
 			'banner_position'         => 'modal',
-			'manage_cookies_trigger'  => 'none',
+			// GDPR: withdrawing consent must be as easy as giving it.
+			'manage_cookies_trigger'  => 'floating',
 			'manage_cookies_position' => 'right',
 		),
 		array_map(
@@ -222,8 +221,7 @@ function hnrk_cookie_default_settings() {
 }
 
 /**
- * Returns the saved settings merged with defaults. Empty texts are replaced by the
- * default text in the current language.
+ * Saved settings merged with defaults; empty texts get the translated default.
  *
  * @return array
  */
@@ -241,8 +239,7 @@ function hnrk_cookie_get_settings() {
 }
 
 /**
- * Empties every text that equals its default (English or the current translation),
- * so it is not locked to one language when saved.
+ * Empties texts that equal their default, so they are not locked to one language.
  *
  * @param array $settings Settings to store.
  * @return array
@@ -258,8 +255,7 @@ function hnrk_cookie_unlock_default_texts( $settings ) {
 }
 
 /**
- * Sites saved before 1.0.6 have the default texts stored in one language. Empty those
- * that are unchanged defaults, so they follow the site's language again.
+ * Sites saved before 1.0.6 have their default texts locked to one language.
  */
 function hnrk_cookie_migrate_default_texts() {
 	$stored = get_option( 'hnrk_cookie_settings' );
@@ -275,6 +271,42 @@ function hnrk_cookie_migrate_default_texts() {
 	}
 }
 add_action( 'admin_init', 'hnrk_cookie_migrate_default_texts' );
+
+/**
+ * Once: turn on the floating button on sites saved with the old default, unless they
+ * already link to the banner (shortcode or #manage-cookies).
+ */
+function hnrk_cookie_migrate_manage_trigger() {
+	if ( get_option( 'hnrk_cookie_trigger_migrated' ) ) {
+		return;
+	}
+
+	$stored = get_option( 'hnrk_cookie_settings' );
+
+	if ( is_array( $stored ) && 'none' === ( $stored['manage_cookies_trigger'] ?? '' ) ) {
+		global $wpdb;
+
+		// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		$in_content = (int) $wpdb->get_var(
+			"SELECT COUNT(*) FROM {$wpdb->posts}
+			WHERE post_status = 'publish'
+			AND ( post_content LIKE '%hnrk_manage_cookies%' OR post_content LIKE '%#manage-cookies%' )"
+		);
+		$in_menus   = (int) $wpdb->get_var(
+			"SELECT COUNT(*) FROM {$wpdb->postmeta}
+			WHERE meta_key = '_menu_item_url' AND meta_value LIKE '%#manage-cookies%'"
+		);
+		// phpcs:enable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+
+		if ( 0 === $in_content && 0 === $in_menus ) {
+			$stored['manage_cookies_trigger'] = 'floating';
+			update_option( 'hnrk_cookie_settings', $stored );
+		}
+	}
+
+	update_option( 'hnrk_cookie_trigger_migrated', time(), false );
+}
+add_action( 'admin_init', 'hnrk_cookie_migrate_manage_trigger' );
 
 // ------------------------------------------------------------
 // Sanitisation
@@ -408,7 +440,7 @@ function hnrk_cookie_field_banner_text() {
 			<div class="hnrk-cookie-admin__category-preview">
 				<?php
 				echo wp_kses(
-					sprintf( $settings['banner_text'], '#' ),
+					str_replace( '%s', '#', $settings['banner_text'] ),
 					array( 'a' => array( 'href' => array() ) )
 				);
 				?>
@@ -803,7 +835,7 @@ function hnrk_cookie_field_trigger() {
 // ------------------------------------------------------------
 
 /**
- * Register the options page under Settings.
+ * Register the admin menu page.
  */
 function hnrk_cookie_add_menu() {
 	add_menu_page(

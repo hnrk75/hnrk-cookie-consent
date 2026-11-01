@@ -8,11 +8,17 @@ Cookie consent banner for WordPress with support for Google Consent Mode v2.
 
 - Shows a cookie banner with the categories **Necessary**, **Analytics / Statistics**,
   **Functional** and **Marketing**. Only the categories the site uses are shown.
-- Stores the visitor's choice in the `hnrk-consent` cookie (lifetime configurable).
-- Updates Google Consent Mode v2 (`analytics_storage`, `ad_storage`, `ad_user_data`,
-  `ad_personalization`) and removes Google Analytics cookies when analytics is declined.
-- A floating **Manage cookies** button lets visitors change their choice.
-- Settings under **Settings → Cookie Consent**: banner texts, cookie policy page,
+- Stores the visitor's choice in the `hnrk-consent` cookie (lifetime configurable,
+  `Secure` on HTTPS). Visitors are asked again when the site turns a category on or off.
+- Google Consent Mode v2: everything is denied by default in `<head>` before any Google
+  tag loads, and updated when the visitor chooses (`analytics_storage`, `ad_storage`,
+  `ad_user_data`, `ad_personalization`, `functionality_storage`,
+  `personalization_storage`). Turn the default off with the `hnrk_cookie_consent_mode`
+  filter if Consent Mode is set up in Google Tag Manager instead.
+- Removes analytics and marketing cookies (`_ga*`, `_fbp`, `_gcl_*` …) when declined.
+- A floating **Manage cookies** button lets visitors change or withdraw their choice
+  (on by default).
+- Settings in the **Cookie Consent** menu in WP admin: banner texts, cookie policy page,
   cookie lifetime, banner position, categories and third-party services.
 - Translated to Swedish (`languages/`). The default texts follow the site's language as
   long as they are not changed; a text you edit in the settings is kept as written.
@@ -28,7 +34,7 @@ Add the repository and require an exact version in the project's `composer.json`
   { "type": "vcs", "url": "https://github.com/hnrk75/hnrk-cookie-consent" }
 ],
 "require": {
-  "hnrk75/hnrk-cookie-consent": "1.0.4"
+  "hnrk75/hnrk-cookie-consent": "1.1.0"
 }
 ```
 
@@ -37,6 +43,34 @@ composer update hnrk75/hnrk-cookie-consent
 ```
 
 It is installed in `web/app/plugins/hnrk-cookie-consent/`. Activate it under **Plugins**.
+
+---
+
+## Using consent in a theme or plugin
+
+The banner only manages the choice. Scripts and embeds that need consent must ask for it:
+
+**Block a script until its category is accepted** — set `type="text/plain"` and
+`data-consent` to the category (`analytics`, `functional`, `marketing`, `thirdparty`):
+
+```html
+<script type="text/plain" data-consent="marketing" src="https://example.com/pixel.js"></script>
+```
+
+It runs as soon as the category is accepted, on this page load or later.
+
+**React in JavaScript** — the `hnrk:consent` event fires on page load (when a choice
+exists) and every time the visitor changes it:
+
+```js
+document.addEventListener('hnrk:consent', (e) => {
+  if (e.detail.functional) loadMap();
+});
+
+window.hnrkConsent.has('analytics'); // true / false
+window.hnrkConsent.get();            // { necessary, analytics, functional, … } or null
+window.hnrkConsent.open();           // open the banner, e.g. from your own link
+```
 
 ---
 

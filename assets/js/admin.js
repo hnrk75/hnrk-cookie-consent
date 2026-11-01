@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
+	const i18n = window.hnrkCookieAdmin ?? { close: 'Close', days: '%s days' };
+
 	// Show / hide the floating button label field based on the trigger radio.
 	const triggerRadios  = document.querySelectorAll('[name="hnrk_cookie_settings[manage_cookies_trigger]"]');
 	const labelWrapper   = document.getElementById('trigger_label_wrapper');
@@ -18,6 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		if (!editor) return;
 
+		const label = btn.textContent.trim();
+
 		// Show any sibling descriptions (e.g. the %s hint) alongside the editor.
 		const hints = body ? Array.from(body.querySelectorAll('.description')) : [];
 
@@ -31,21 +35,21 @@ document.addEventListener('DOMContentLoaded', () => {
 					if (editor.tagName === 'TEXTAREA' || editor.type === 'text' || editor.type === 'url') {
 						preview.textContent = val;
 					} else if (editor.type === 'number') {
-						preview.textContent = val + ' days';
+						preview.textContent = i18n.days.replace('%s', val);
 					}
 				}
 				editor.setAttribute('hidden', '');
 				hints.forEach((h) => h.setAttribute('hidden', ''));
 				if (preview) preview.removeAttribute('hidden');
 				btn.setAttribute('aria-expanded', 'false');
-				btn.textContent = 'Edit';
+				btn.textContent = label;
 			} else {
 				if (preview) preview.setAttribute('hidden', '');
 				editor.removeAttribute('hidden');
 				hints.forEach((h) => h.removeAttribute('hidden'));
 				editor.focus();
 				btn.setAttribute('aria-expanded', 'true');
-				btn.textContent = 'Close';
+				btn.textContent = i18n.close;
 			}
 		});
 	});

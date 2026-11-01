@@ -3,7 +3,7 @@
  * Plugin Name: HNRK Cookie Consent
  * Plugin URI:  https://github.com/hnrk75/hnrk-cookie-consent
  * Description: Cookie consent banner with support for Google Consent Mode v2. Manages the categories Necessary, Analytics, Functional and Marketing.
- * Version:     1.0.6
+ * Version:     1.1.0
  * Author:      Henrik Pettersson
  * Author URI:  https://github.com/hnrk75
  * License:     GPL-2.0-or-later
@@ -67,10 +67,71 @@ function hnrk_cookie_enqueue() {
 			'enableFunctional' => (bool) $settings['enable_functional'],
 			'enableMarketing'  => (bool) $settings['enable_marketing'],
 			'enableThirdparty' => (bool) $settings['enable_thirdparty'],
+			'consentVersion'   => hnrk_cookie_consent_version( $settings ),
 		)
 	);
 }
 add_action( 'wp_enqueue_scripts', 'hnrk_cookie_enqueue' );
+
+/**
+ * Changes when a category is turned on or off, so visitors are asked again.
+ *
+ * @param array $settings Plugin settings.
+ * @return string
+ */
+function hnrk_cookie_consent_version( $settings ) {
+	$categories = array();
+
+	foreach ( array( 'analytics', 'functional', 'marketing', 'thirdparty' ) as $category ) {
+		if ( ! empty( $settings[ 'enable_' . $category ] ) ) {
+			$categories[] = $category;
+		}
+	}
+
+	return substr( md5( implode( ',', $categories ) ), 0, 8 );
+}
+
+/**
+ * Google Consent Mode v2 default (all denied), before any Google tag loads.
+ */
+function hnrk_cookie_consent_mode_default() {
+	if ( ! apply_filters( 'hnrk_cookie_consent_mode', true ) ) {
+		return;
+	}
+
+	$script = <<<'JS'
+window.dataLayer = window.dataLayer || [];
+window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+gtag('consent', 'default', {
+	ad_storage: 'denied',
+	ad_user_data: 'denied',
+	ad_personalization: 'denied',
+	analytics_storage: 'denied',
+	functionality_storage: 'denied',
+	personalization_storage: 'denied',
+	security_storage: 'granted',
+	wait_for_update: 500
+});
+(function () {
+	var match = document.cookie.match(/(?:^|; )hnrk-consent=([^;]*)/);
+	if (!match) return;
+	try {
+		var c = JSON.parse(decodeURIComponent(match[1]));
+		gtag('consent', 'update', {
+			analytics_storage: c.analytics ? 'granted' : 'denied',
+			ad_storage: c.marketing ? 'granted' : 'denied',
+			ad_user_data: c.marketing ? 'granted' : 'denied',
+			ad_personalization: c.marketing ? 'granted' : 'denied',
+			functionality_storage: c.functional ? 'granted' : 'denied',
+			personalization_storage: c.functional ? 'granted' : 'denied'
+		});
+	} catch (e) {}
+})();
+JS;
+
+	wp_print_inline_script_tag( $script, array( 'id' => 'hnrk-consent-mode' ) );
+}
+add_action( 'wp_head', 'hnrk_cookie_consent_mode_default', 1 );
 
 /**
  * Render the cookie banner in the footer.
@@ -105,13 +166,21 @@ function hnrk_cookie_admin_assets( $hook ) {
 		HNRK_COOKIE_VERSION,
 		true
 	);
+
+	wp_localize_script(
+		'hnrk-cookie-admin',
+		'hnrkCookieAdmin',
+		array(
+			'close' => __( 'Close', 'hnrk-cookie-consent' ),
+			/* translators: %s: number of days */
+			'days'  => __( '%s days', 'hnrk-cookie-consent' ),
+		)
+	);
 }
 add_action( 'admin_enqueue_scripts', 'hnrk_cookie_admin_assets' );
 
 /**
- * Shortcode [hnrk_manage_cookies text="Cookie settings"].
- * Outputs a link that reopens the consent banner. Without `text`, the "Manage cookies"
- * label from the settings is used (in the site's language unless changed).
+ * Shortcode [hnrk_manage_cookies text="Cookie settings"]: a link that reopens the banner.
  *
  * @param array $atts Shortcode attributes.
  * @return string

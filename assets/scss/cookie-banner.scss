@@ -31,9 +31,7 @@ body.cookie-banner-open {
 	max-height: calc(100dvh - 2rem);
 	overflow-y: auto;
 
-	// Appearance — the plugin has no dark mode of its own, since it cannot know how a
-	// theme switches modes. Themes map the --hnrk-cookie-* variables to their own colors
-	// (see README); without them the generic --color-* tokens are used as before.
+	// Appearance — themes map --hnrk-cookie-* to their own colors (see README).
 	background-color: var(--hnrk-cookie-bg, var(--color-white));
 	border: 1px solid var(--hnrk-cookie-border, var(--color-gray-light));
 	border-radius: var(--radius-md);
