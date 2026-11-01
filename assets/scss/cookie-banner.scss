@@ -31,15 +31,18 @@ body.cookie-banner-open {
 	max-height: calc(100dvh - 2rem);
 	overflow-y: auto;
 
-	// Appearance — inherits all tokens from the active theme
-	background-color: var(--color-white);
-	border: 1px solid var(--color-gray-light);
+	// Appearance — the plugin has no dark mode of its own, since it cannot know how a
+	// theme switches modes. Themes map the --hnrk-cookie-* variables to their own colors
+	// (see README); without them the generic --color-* tokens are used as before.
+	background-color: var(--hnrk-cookie-bg, var(--color-white));
+	border: 1px solid var(--hnrk-cookie-border, var(--color-gray-light));
 	border-radius: var(--radius-md);
+	color-scheme: var(--hnrk-cookie-color-scheme, normal);
 
 	font-family: var(--font-family-body);
 	font-size: var(--wp--preset--font-size--medium, 1rem);
 	line-height: var(--line-height-body, 1.6);
-	color: var(--color-dark);
+	color: var(--hnrk-cookie-text, var(--color-dark));
 
 	&__main {
 		display: flex;
@@ -53,7 +56,7 @@ body.cookie-banner-open {
 		font-family: var(--font-family-heading);
 		font-size: var(--wp--preset--font-size--h-3, 1.625rem);
 		line-height: var(--line-height-heading, 1.2);
-		color: var(--color-dark);
+		color: var(--hnrk-cookie-text, var(--color-dark));
 	}
 
 	&__text {
@@ -72,7 +75,7 @@ body.cookie-banner-open {
 		flex-direction: column;
 		gap: var(--space-sm);
 		padding-top: var(--space-sm);
-		border-top: 1px solid var(--color-gray-light);
+		border-top: 1px solid var(--hnrk-cookie-border, var(--color-gray-light));
 	}
 
 	&__actions {
@@ -100,7 +103,7 @@ body.cookie-banner-open {
 			display: grid;
 			grid-template-columns: repeat(3, 1fr);
 			gap: var(--space-sm);
-			border-top: 1px solid var(--color-gray-light);
+			border-top: 1px solid var(--hnrk-cookie-border, var(--color-gray-light));
 			padding-top: var(--space-sm);
 
 			@media (width < 64rem) {
@@ -133,8 +136,8 @@ body.cookie-banner-open {
 	align-items: center;
 	gap: 0.5rem;
 	padding: 0.5rem 1rem 0.5rem 0.75rem;
-	background-color: var(--color-dark);
-	color: var(--color-white);
+	background-color: var(--hnrk-cookie-reopen-bg, var(--color-dark));
+	color: var(--hnrk-cookie-reopen-text, var(--color-white));
 	border: none;
 	border-radius: 2rem;
 	font-family: var(--font-family-body);

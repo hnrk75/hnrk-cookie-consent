@@ -3,7 +3,7 @@
  * Plugin Name: HNRK Cookie Consent
  * Plugin URI:  https://github.com/hnrk75/hnrk-cookie-consent
  * Description: Cookie consent banner with support for Google Consent Mode v2. Manages the categories Necessary, Analytics, Functional and Marketing.
- * Version:     1.0.4
+ * Version:     1.0.5
  * Author:      Henrik Pettersson
  * Author URI:  https://github.com/hnrk75
  * License:     GPL-2.0-or-later

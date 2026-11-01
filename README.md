@@ -39,6 +39,39 @@ It is installed in `web/app/plugins/hnrk-cookie-consent/`. Activate it under **P
 
 ---
 
+## Colors and dark mode
+
+The plugin has no dark mode of its own — it cannot know how a theme switches modes.
+Instead the banner reads these variables, which a theme maps to its own colors. Each
+falls back to a generic token, so sites that set none of them look as before.
+
+| Variable | Used for | Fallback |
+|----------|----------|----------|
+| `--hnrk-cookie-bg` | Banner background | `--color-white` |
+| `--hnrk-cookie-text` | Banner text and title | `--color-dark` |
+| `--hnrk-cookie-border` | Banner border and dividers | `--color-gray-light` |
+| `--hnrk-cookie-reopen-bg` | "Manage cookies" button background | `--color-dark` |
+| `--hnrk-cookie-reopen-text` | "Manage cookies" button text | `--color-white` |
+| `--hnrk-cookie-color-scheme` | Native controls (checkboxes, scrollbar): `light`, `dark` or `normal` | `normal` |
+
+Buttons and links use `--color-primary`, and category descriptions are the text color at
+75 % opacity, so they follow automatically.
+
+Example — a theme whose own variables already switch in dark mode:
+
+```scss
+:root {
+  --hnrk-cookie-bg: var(--color-bg);
+  --hnrk-cookie-text: var(--color-text);
+}
+
+html[data-theme='dark'] {
+  --hnrk-cookie-color-scheme: dark;
+}
+```
+
+---
+
 ## Development
 
 ```bash

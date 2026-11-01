@@ -11,6 +11,17 @@ plugin uses [Semantic Versioning](https://semver.org/):
 
 ## [Unreleased]
 
+## [1.0.5] - 2026-11-01
+
+### Added
+- Theme variables for the banner colors: `--hnrk-cookie-bg`, `--hnrk-cookie-text`, `--hnrk-cookie-border`, `--hnrk-cookie-reopen-bg`, `--hnrk-cookie-reopen-text` and `--hnrk-cookie-color-scheme`. A theme maps them to its own colors, so the banner can follow the theme's dark mode. See README.
+
+### Fixed
+- The banner background and text did not follow a theme's dark mode (only the buttons did), because they used fixed generic tokens. Without the new variables the banner looks exactly as before.
+
+### Changed
+- The committed CSS is a production (minified) build.
+
 ## [1.0.4] - 2026-11-01
 
 ### Changed
