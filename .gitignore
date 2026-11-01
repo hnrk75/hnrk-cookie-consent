@@ -1,21 +1,17 @@
-# Dependencies
+# Dependencies — the plugin has no runtime Composer dependencies,
+# vendor/ only holds local dev tools (PHPCS).
 node_modules/
+vendor/
 
-# Vendor — tracked so GitHub releases are self-contained
-# Only exclude dev-only tools
-vendor/squizlabs/
-vendor/wp-coding-standards/
-vendor/dealerdirect/
-vendor/phpcsstandards/
+# Built CSS/JS ARE committed: sites install the plugin with Composer
+# and never build it. Only sourcemaps are ignored.
+*.map
 
 # macOS
 .DS_Store
 
-# Editor
+# Editor / tools
 .idea/
 .vscode/
+.claude/
 *.code-workspace
-
-# Build artifacts (om du väljer att inte committa kompilerat)
-# assets/css/*.css
-# assets/js/*.min.js
