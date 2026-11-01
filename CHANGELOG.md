@@ -11,6 +11,16 @@ plugin uses [Semantic Versioning](https://semver.org/):
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-11-01
+
+### Added
+- Cookie policy page picker in the settings, with an optional custom URL instead.
+- `hnrk_cookie_page_url()` returns the URL the banner uses (the selected page, else the custom URL, then the `hnrk_cookie_page_url` filter).
+
+### Changed
+- When a theme sets the link through the `hnrk_cookie_page_url` filter (e.g. WP Starter Theme's cookie policy page), the settings show that link as "Set by the theme" with a link to edit the page, and the field cannot be changed.
+- No default URL any more: without a page the banner leaves out the link, and the settings show a warning. A saved old default `/cookies/` is ignored unless a page actually lives there.
+
 ## [1.1.0] - 2026-11-01
 
 Fixes from the first client site built on the starter template (svenssonsmetropol).

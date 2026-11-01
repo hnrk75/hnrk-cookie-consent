@@ -56,7 +56,7 @@ function hnrk_cookie_register_settings() {
 
 	add_settings_field(
 		'cookie_page_url',
-		__( 'Cookie policy page URL', 'hnrk-cookie-consent' ),
+		__( 'Cookie policy page', 'hnrk-cookie-consent' ),
 		'hnrk_cookie_field_url',
 		'hnrk-cookie-consent-general',
 		'hnrk_cookie_section_general'
@@ -200,7 +200,8 @@ function hnrk_cookie_default_texts() {
 function hnrk_cookie_default_settings() {
 	return array_merge(
 		array(
-			'cookie_page_url'         => home_url( '/cookies/' ),
+			'cookie_page_id'          => 0,
+			'cookie_page_url'         => '',
 			'cookie_days'             => 365,
 			'enable_analytics'        => false,
 			'enable_functional'       => false,
@@ -236,6 +237,38 @@ function hnrk_cookie_get_settings() {
 	}
 
 	return $settings;
+}
+
+/**
+ * The cookie policy URL from the settings: the selected page, else the custom URL.
+ *
+ * @param array $settings Plugin settings.
+ * @return string Empty when there is no page.
+ */
+function hnrk_cookie_own_page_url( $settings ) {
+	$page_id = (int) $settings['cookie_page_id'];
+
+	if ( $page_id && 'publish' === get_post_status( $page_id ) ) {
+		return (string) get_permalink( $page_id );
+	}
+
+	$url = (string) $settings['cookie_page_url'];
+
+	// The old default /cookies/ is ignored unless a page actually lives there.
+	if ( $url && untrailingslashit( $url ) === untrailingslashit( home_url( '/cookies' ) ) && ! url_to_postid( $url ) ) {
+		return '';
+	}
+
+	return $url;
+}
+
+/**
+ * The cookie policy URL the banner uses. A theme can set it with `hnrk_cookie_page_url`.
+ *
+ * @return string Empty when there is no page.
+ */
+function hnrk_cookie_page_url() {
+	return (string) apply_filters( 'hnrk_cookie_page_url', hnrk_cookie_own_page_url( hnrk_cookie_get_settings() ) );
 }
 
 /**
@@ -336,8 +369,12 @@ function hnrk_cookie_sanitize_settings( $input ) {
 		);
 	}
 
-	if ( ! empty( $input['cookie_page_url'] ) ) {
-		$clean['cookie_page_url'] = esc_url_raw( $input['cookie_page_url'] );
+	if ( isset( $input['cookie_page_id'] ) ) {
+		$clean['cookie_page_id'] = absint( $input['cookie_page_id'] );
+	}
+
+	if ( isset( $input['cookie_page_url'] ) ) {
+		$clean['cookie_page_url'] = esc_url_raw( trim( (string) $input['cookie_page_url'] ) );
 	}
 
 	if ( isset( $input['cookie_days'] ) ) {
@@ -459,33 +496,68 @@ function hnrk_cookie_field_banner_text() {
 
 /** Renders the cookie page URL field. */
 function hnrk_cookie_field_url() {
-	$settings = hnrk_cookie_get_settings();
+	$settings  = hnrk_cookie_get_settings();
+	$own_url   = hnrk_cookie_own_page_url( $settings );
+	$url       = hnrk_cookie_page_url();
+	$by_filter = $url !== $own_url;
 	?>
 	<div class="hnrk-cookie-admin__category">
 		<div class="hnrk-cookie-admin__category-header">
 			<p class="hnrk-cookie-admin__hint">
 				<?php
-				/* translators: %s is replaced with the placeholder text in the banner text field. */
-				esc_html_e( 'Link inserted into the banner text via %s. Leave empty to use the default path /cookies/.', 'hnrk-cookie-consent' );
+				/* translators: %s is the placeholder in the banner text field. */
+				esc_html_e( 'The page the banner links to via %s.', 'hnrk-cookie-consent' );
 				?>
 			</p>
-			<button type="button" class="hnrk-cookie-admin__edit-link" aria-expanded="false" aria-controls="cookie_page_url_editor">
-				<?php esc_html_e( 'Edit', 'hnrk-cookie-consent' ); ?>
-			</button>
+			<?php if ( ! $by_filter ) : ?>
+				<button type="button" class="hnrk-cookie-admin__edit-link" aria-expanded="false" aria-controls="cookie_page_url_editor">
+					<?php esc_html_e( 'Edit', 'hnrk-cookie-consent' ); ?>
+				</button>
+			<?php elseif ( $url && get_edit_post_link( url_to_postid( $url ) ) ) : ?>
+				<a class="hnrk-cookie-admin__edit-link" href="<?php echo esc_url( get_edit_post_link( url_to_postid( $url ) ) ); ?>">
+					<?php esc_html_e( 'Edit', 'hnrk-cookie-consent' ); ?>
+				</a>
+			<?php endif; ?>
 		</div>
 		<div class="hnrk-cookie-admin__category-body">
 			<div class="hnrk-cookie-admin__category-preview">
-				<?php echo esc_html( $settings['cookie_page_url'] ); ?>
+				<?php if ( $by_filter && $url ) : ?>
+					<?php esc_html_e( 'Set by the theme:', 'hnrk-cookie-consent' ); ?>
+					<a href="<?php echo esc_url( $url ); ?>" target="_blank" rel="noopener noreferrer"><?php echo esc_html( $url ); ?></a>
+				<?php elseif ( $url ) : ?>
+					<a href="<?php echo esc_url( $url ); ?>" target="_blank" rel="noopener noreferrer"><?php echo esc_html( $url ); ?></a>
+				<?php else : ?>
+					<strong><?php esc_html_e( 'No page selected — the banner shows no link to a cookie policy.', 'hnrk-cookie-consent' ); ?></strong>
+				<?php endif; ?>
 			</div>
-			<input
-				type="url"
-				name="hnrk_cookie_settings[cookie_page_url]"
-				id="cookie_page_url_editor"
-				value="<?php echo esc_attr( $settings['cookie_page_url'] ); ?>"
-				class="hnrk-cookie-admin__category-editor widefat"
-				placeholder="<?php echo esc_attr( home_url( '/cookies/' ) ); ?>"
-				hidden
-			>
+			<?php if ( ! $by_filter ) : ?>
+				<div id="cookie_page_url_editor" class="hnrk-cookie-admin__category-editor" hidden>
+					<p>
+						<label for="cookie_page_id"><?php esc_html_e( 'Page', 'hnrk-cookie-consent' ); ?></label><br>
+						<?php
+						wp_dropdown_pages(
+							array(
+								'name'              => 'hnrk_cookie_settings[cookie_page_id]',
+								'id'                => 'cookie_page_id',
+								'selected'          => (int) $settings['cookie_page_id'],
+								'show_option_none'  => esc_html__( '— Select a page —', 'hnrk-cookie-consent' ),
+								'option_none_value' => '0',
+							)
+						);
+						?>
+					</p>
+					<p>
+						<label for="cookie_page_custom_url"><?php esc_html_e( 'Or a custom URL', 'hnrk-cookie-consent' ); ?></label><br>
+						<input
+							type="url"
+							name="hnrk_cookie_settings[cookie_page_url]"
+							id="cookie_page_custom_url"
+							value="<?php echo esc_attr( $settings['cookie_page_url'] ); ?>"
+							class="widefat"
+						>
+					</p>
+				</div>
+			<?php endif; ?>
 		</div>
 	</div>
 	<?php

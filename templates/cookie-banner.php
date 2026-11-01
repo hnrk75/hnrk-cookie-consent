@@ -8,7 +8,7 @@
  */
 
 $settings        = hnrk_cookie_get_settings();
-$cookie_page_url = apply_filters( 'hnrk_cookie_page_url', $settings['cookie_page_url'] );
+$cookie_page_url = hnrk_cookie_page_url();
 $is_bottom_bar   = 'bottom' === $settings['banner_position'];
 $banner_class    = $is_bottom_bar ? 'cookie-banner cookie-banner--bottom' : 'cookie-banner';
 ?>
@@ -39,10 +39,11 @@ $banner_class    = $is_bottom_bar ? 'cookie-banner cookie-banner--bottom' : 'coo
 		<p class="cookie-banner__text" id="cookie-banner-desc">
 			<?php
 			// Not printf: an admin's "%" would cause a fatal error.
-			echo wp_kses(
-				str_replace( '%s', esc_url( $cookie_page_url ), $settings['banner_text'] ),
-				array( 'a' => array( 'href' => array() ) )
-			);
+			$banner_text = $cookie_page_url
+				? str_replace( '%s', esc_url( $cookie_page_url ), $settings['banner_text'] )
+				: preg_replace( '#\s*<a\b[^>]*%s[^>]*>.*?</a>#is', '', $settings['banner_text'] );
+
+			echo wp_kses( $banner_text, array( 'a' => array( 'href' => array() ) ) );
 			?>
 		</p>
 

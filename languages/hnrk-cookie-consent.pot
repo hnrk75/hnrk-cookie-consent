@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: HNRK Cookie Consent 1.0.6\n"
+"Project-Id-Version: HNRK Cookie Consent 1.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/hnrk-cookie-consent\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-01T13:48:25+00:00\n"
+"POT-Creation-Date: 2026-11-01T14:36:20+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: hnrk-cookie-consent\n"
@@ -39,12 +39,12 @@ msgstr ""
 msgid "https://github.com/hnrk75"
 msgstr ""
 
-#: hnrk-cookie-consent.php:180
+#: hnrk-cookie-consent.php:174
 msgid "Close"
 msgstr ""
 
 #. translators: %s: number of days
-#: hnrk-cookie-consent.php:182
+#: hnrk-cookie-consent.php:176
 #, php-format
 msgid "%s days"
 msgstr ""
@@ -58,7 +58,7 @@ msgid "Banner intro text"
 msgstr ""
 
 #: inc/settings.php:59
-msgid "Cookie policy page URL"
+msgid "Cookie policy page"
 msgstr ""
 
 #: inc/settings.php:67
@@ -70,7 +70,7 @@ msgid "Banner position"
 msgstr ""
 
 #: inc/settings.php:91
-#: templates/cookie-banner.php:56
+#: templates/cookie-banner.php:55
 msgid "Necessary"
 msgstr ""
 
@@ -79,201 +79,222 @@ msgid "Analytics / Statistics"
 msgstr ""
 
 #: inc/settings.php:107
-#: templates/cookie-banner.php:90
+#: templates/cookie-banner.php:89
 msgid "Functional"
 msgstr ""
 
 #: inc/settings.php:115
-#: templates/cookie-banner.php:106
+#: templates/cookie-banner.php:105
 msgid "Marketing"
 msgstr ""
 
 #: inc/settings.php:123
-#: templates/cookie-banner.php:122
+#: templates/cookie-banner.php:121
 msgid "Third-party services"
 msgstr ""
 
 #: inc/settings.php:139
-#: inc/settings.php:854
+#: inc/settings.php:956
 msgid "Reopen banner"
 msgstr ""
 
-#: inc/settings.php:163
+#: inc/settings.php:161
 msgid "We value your privacy"
 msgstr ""
 
 #. translators: %s: URL of the cookie policy page.
-#: inc/settings.php:168
+#: inc/settings.php:166
 #, php-format
 msgid "We use cookies to improve your experience, show personalised content and analyse our traffic. By clicking \"Accept all\" you consent to our use of cookies. <a href=\"%s\">Read about cookies</a>"
 msgstr ""
 
-#: inc/settings.php:172
+#: inc/settings.php:170
 msgid "Required for the website to function properly. These cookies do not store any personal data."
 msgstr ""
 
-#: inc/settings.php:176
+#: inc/settings.php:174
 msgid "Help us understand how visitors interact with the website — number of visitors, bounce rate, traffic source, etc."
 msgstr ""
 
-#: inc/settings.php:180
+#: inc/settings.php:178
 msgid "Enable enhanced functionality such as saved preferences, language selection or embedded content."
 msgstr ""
 
-#: inc/settings.php:184
+#: inc/settings.php:182
 msgid "Used for personalised advertising and tracking via third-party services such as Google Ads and Meta."
 msgstr ""
 
-#: inc/settings.php:188
+#: inc/settings.php:186
 msgid "Cookies from embedded services such as YouTube, Vimeo or Google Maps."
 msgstr ""
 
-#: inc/settings.php:192
-#: inc/settings.php:760
+#: inc/settings.php:190
+#: inc/settings.php:862
 msgid "Manage cookies"
 msgstr ""
 
-#: inc/settings.php:370
+#: inc/settings.php:437
 msgid "The heading displayed at the top of the cookie banner."
 msgstr ""
 
-#: inc/settings.php:373
-#: inc/settings.php:406
-#: inc/settings.php:443
-#: inc/settings.php:509
+#: inc/settings.php:440
+#: inc/settings.php:473
+#: inc/settings.php:514
+#: inc/settings.php:518
+#: inc/settings.php:611
 msgid "Edit"
 msgstr ""
 
 #. translators: %s is replaced with the cookie policy page URL.
-#: inc/settings.php:402
+#: inc/settings.php:469
 #, php-format
 msgid "The intro text in the banner. Use %s as a placeholder where the link to the cookie policy page is inserted."
 msgstr ""
 
-#. translators: %s is replaced with the placeholder text in the banner text field.
-#: inc/settings.php:439
+#. translators: %s is the placeholder in the banner text field.
+#: inc/settings.php:509
 #, php-format
-msgid "Link inserted into the banner text via %s. Leave empty to use the default path /cookies/."
+msgid "The page the banner links to via %s."
 msgstr ""
 
-#: inc/settings.php:472
-msgid "Modal is displayed centred on the page with a dark overlay. Strip is displayed along the bottom of the page without an overlay."
+#: inc/settings.php:525
+msgid "Set by the theme:"
 msgstr ""
 
-#: inc/settings.php:483
-msgid "Modal (centred)"
+#: inc/settings.php:530
+msgid "No page selected — the banner shows no link to a cookie policy."
 msgstr ""
 
-#: inc/settings.php:492
-msgid "Strip (bottom)"
-msgstr ""
-
-#: inc/settings.php:506
-msgid "How long the visitor's consent choice is stored. Default: 365 days (1 year)."
-msgstr ""
-
-#: inc/settings.php:514
-msgid "days"
-msgstr ""
-
-#: inc/settings.php:533
-msgid "Necessary cookies are always shown. Enable the categories your site actually uses — others will not appear in the banner."
+#: inc/settings.php:536
+msgid "Page"
 msgstr ""
 
 #: inc/settings.php:543
+msgid "— Select a page —"
+msgstr ""
+
+#: inc/settings.php:550
+msgid "Or a custom URL"
+msgstr ""
+
+#: inc/settings.php:574
+msgid "Modal is displayed centred on the page with a dark overlay. Strip is displayed along the bottom of the page without an overlay."
+msgstr ""
+
+#: inc/settings.php:585
+msgid "Modal (centred)"
+msgstr ""
+
+#: inc/settings.php:594
+msgid "Strip (bottom)"
+msgstr ""
+
+#: inc/settings.php:608
+msgid "How long the visitor's consent choice is stored. Default: 365 days (1 year)."
+msgstr ""
+
+#: inc/settings.php:616
+msgid "days"
+msgstr ""
+
+#: inc/settings.php:635
+msgid "Necessary cookies are always shown. Enable the categories your site actually uses — others will not appear in the banner."
+msgstr ""
+
+#: inc/settings.php:645
 msgid "Always active"
 msgstr ""
 
-#: inc/settings.php:546
-#: inc/settings.php:588
-#: inc/settings.php:626
-#: inc/settings.php:662
-#: inc/settings.php:698
+#: inc/settings.php:648
+#: inc/settings.php:690
+#: inc/settings.php:728
+#: inc/settings.php:764
+#: inc/settings.php:800
 msgid "Edit info"
 msgstr ""
 
-#: inc/settings.php:579
-#: inc/settings.php:623
-#: inc/settings.php:659
-#: inc/settings.php:695
+#: inc/settings.php:681
+#: inc/settings.php:725
+#: inc/settings.php:761
+#: inc/settings.php:797
 msgid "Show category"
 msgstr ""
 
-#: inc/settings.php:731
+#: inc/settings.php:833
 msgid "None"
 msgstr ""
 
-#: inc/settings.php:740
-#: inc/settings.php:746
+#: inc/settings.php:842
+#: inc/settings.php:848
 msgid "Floating button"
 msgstr ""
 
-#: inc/settings.php:749
+#: inc/settings.php:851
 msgid "A small button is shown in the corner of the page so visitors can reopen their cookie settings. The button label is optional — default is \"Manage cookies\"."
 msgstr ""
 
-#: inc/settings.php:752
+#: inc/settings.php:854
 msgid "Button label"
 msgstr ""
 
-#: inc/settings.php:770
+#: inc/settings.php:872
 msgid "Right"
 msgstr ""
 
-#: inc/settings.php:779
+#: inc/settings.php:881
 msgid "Left"
 msgstr ""
 
-#: inc/settings.php:786
+#: inc/settings.php:888
 msgid "Shortcode"
 msgstr ""
 
-#: inc/settings.php:789
+#: inc/settings.php:891
 msgid "Place a link anywhere on the site — e.g. on the privacy policy page:"
 msgstr ""
 
-#: inc/settings.php:792
+#: inc/settings.php:894
 msgid "Default:"
 msgstr ""
 
-#: inc/settings.php:796
+#: inc/settings.php:898
 msgid "Custom text:"
 msgstr ""
 
-#: inc/settings.php:812
-#: inc/settings.php:813
+#: inc/settings.php:914
+#: inc/settings.php:915
 msgid "Cookie Consent"
 msgstr ""
 
-#: inc/settings.php:844
+#: inc/settings.php:946
 msgid "Banner"
 msgstr ""
 
-#: inc/settings.php:849
+#: inc/settings.php:951
 msgid "Categories"
 msgstr ""
 
-#: inc/settings.php:856
+#: inc/settings.php:958
 msgid "Choose how visitors can reopen the banner after making their choice."
 msgstr ""
 
-#: inc/settings.php:861
-#: templates/cookie-banner.php:141
+#: inc/settings.php:963
+#: templates/cookie-banner.php:140
 msgid "Save settings"
 msgstr ""
 
-#: templates/cookie-banner.php:63
+#: templates/cookie-banner.php:62
 msgid "Necessary cookies, always active"
 msgstr ""
 
-#: templates/cookie-banner.php:74
+#: templates/cookie-banner.php:73
 msgid "Analytics"
 msgstr ""
 
-#: templates/cookie-banner.php:138
+#: templates/cookie-banner.php:137
 msgid "Reject all"
 msgstr ""
 
-#: templates/cookie-banner.php:144
+#: templates/cookie-banner.php:143
 msgid "Accept all"
 msgstr ""

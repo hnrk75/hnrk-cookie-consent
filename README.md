@@ -34,7 +34,7 @@ Add the repository and require an exact version in the project's `composer.json`
   { "type": "vcs", "url": "https://github.com/hnrk75/hnrk-cookie-consent" }
 ],
 "require": {
-  "hnrk75/hnrk-cookie-consent": "1.1.0"
+  "hnrk75/hnrk-cookie-consent": "1.2.0"
 }
 ```
 
