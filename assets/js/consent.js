@@ -228,5 +228,16 @@
 			e.preventDefault();
 			reopen();
 		});
+
+		// Links that open a dialog are buttons for assistive technology, and Space activates them.
+		if (btn.tagName === 'A') {
+			btn.setAttribute('role', 'button');
+			btn.addEventListener('keydown', (e) => {
+				if (e.key === ' ') {
+					e.preventDefault();
+					reopen();
+				}
+			});
+		}
 	});
 })();

@@ -3,7 +3,7 @@
  * Plugin Name: HNRK Cookie Consent
  * Plugin URI:  https://github.com/hnrk75/hnrk-cookie-consent
  * Description: Cookie consent banner with support for Google Consent Mode v2. Manages the categories Necessary, Analytics, Functional and Marketing.
- * Version:     1.2.0
+ * Version:     1.3.0
  * Author:      Henrik Pettersson
  * Author URI:  https://github.com/hnrk75
  * License:     GPL-2.0-or-later
@@ -180,6 +180,45 @@ function hnrk_cookie_admin_assets( $hook ) {
 add_action( 'admin_enqueue_scripts', 'hnrk_cookie_admin_assets' );
 
 /**
+ * Whether the theme prints the "Manage cookies" link in its footer.
+ *
+ * @return bool
+ */
+function hnrk_cookie_footer_supported() {
+	return current_theme_supports( 'hnrk-cookie-consent-footer' );
+}
+
+/**
+ * How visitors reopen the banner: 'floating' or 'footer'. Falls back to the floating
+ * button when the theme does not support the footer link, so there is always a way.
+ *
+ * @return string
+ */
+function hnrk_cookie_manage_trigger() {
+	$trigger = hnrk_cookie_get_settings()['manage_cookies_trigger'];
+
+	return ( 'footer' === $trigger && hnrk_cookie_footer_supported() ) ? 'footer' : 'floating';
+}
+
+/**
+ * A link that reopens the banner, for themes and the shortcode.
+ *
+ * @param array $args { text, class }.
+ * @return string
+ */
+function hnrk_cookie_manage_link( $args = array() ) {
+	$args = wp_parse_args(
+		$args,
+		array(
+			'text'  => hnrk_cookie_get_settings()['manage_cookies_label'],
+			'class' => 'hnrk-manage-cookies-link',
+		)
+	);
+
+	return '<a href="#manage-cookies" class="' . esc_attr( $args['class'] ) . '" data-consent-reopen role="button">' . esc_html( $args['text'] ) . '</a>';
+}
+
+/**
  * Shortcode [hnrk_manage_cookies text="Cookie settings"]: a link that reopens the banner.
  *
  * @param array $atts Shortcode attributes.
@@ -191,18 +230,20 @@ function hnrk_cookie_manage_shortcode( $atts ) {
 		$atts,
 		'hnrk_manage_cookies'
 	);
-	return '<a href="#manage-cookies" class="hnrk-manage-cookies-link">' . esc_html( $atts['text'] ) . '</a>';
+
+	return hnrk_cookie_manage_link( array( 'text' => $atts['text'] ) );
 }
 add_shortcode( 'hnrk_manage_cookies', 'hnrk_cookie_manage_shortcode' );
 
 /**
- * Render the floating reopen button if enabled in Settings.
+ * Render the floating reopen button.
  */
 function hnrk_cookie_floating_btn() {
-	$settings = hnrk_cookie_get_settings();
-	if ( 'floating' !== $settings['manage_cookies_trigger'] ) {
+	if ( 'floating' !== hnrk_cookie_manage_trigger() ) {
 		return;
 	}
+
+	$settings = hnrk_cookie_get_settings();
 	$label    = $settings['manage_cookies_label'];
 	$position = isset( $settings['manage_cookies_position'] ) && 'left' === $settings['manage_cookies_position']
 		? 'hnrk-cookie-reopen hnrk-cookie-reopen--left'

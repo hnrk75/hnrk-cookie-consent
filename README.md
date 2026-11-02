@@ -16,8 +16,8 @@ Cookie consent banner for WordPress with support for Google Consent Mode v2.
   `personalization_storage`). Turn the default off with the `hnrk_cookie_consent_mode`
   filter if Consent Mode is set up in Google Tag Manager instead.
 - Removes analytics and marketing cookies (`_ga*`, `_fbp`, `_gcl_*` …) when declined.
-- A floating **Manage cookies** button lets visitors change or withdraw their choice
-  (on by default).
+- **Manage cookies** lets visitors change or withdraw their choice at any time: a floating
+  button, or a link in the theme's footer (see below).
 - Settings in the **Cookie Consent** menu in WP admin: banner texts, cookie policy page,
   cookie lifetime, banner position, categories and third-party services.
 - Translated to Swedish (`languages/`). The default texts follow the site's language as
@@ -34,7 +34,7 @@ Add the repository and require an exact version in the project's `composer.json`
   { "type": "vcs", "url": "https://github.com/hnrk75/hnrk-cookie-consent" }
 ],
 "require": {
-  "hnrk75/hnrk-cookie-consent": "1.2.0"
+  "hnrk75/hnrk-cookie-consent": "1.3.0"
 }
 ```
 
@@ -43,6 +43,25 @@ composer update hnrk75/hnrk-cookie-consent
 ```
 
 It is installed in `web/app/plugins/hnrk-cookie-consent/`. Activate it under **Plugins**.
+
+---
+
+## "Manage cookies" in a theme's footer
+
+A theme that prints the link itself declares support, and the option **In the footer**
+becomes available in the settings:
+
+```php
+add_theme_support( 'hnrk-cookie-consent-footer' );
+
+// In footer.php:
+if ( function_exists( 'hnrk_cookie_manage_link' ) && 'footer' === hnrk_cookie_manage_trigger() ) {
+	echo hnrk_cookie_manage_link();
+}
+```
+
+Without that support the floating button is always used, so a site is never left without
+a way to reopen the banner.
 
 ---
 

@@ -306,38 +306,22 @@ function hnrk_cookie_migrate_default_texts() {
 add_action( 'admin_init', 'hnrk_cookie_migrate_default_texts' );
 
 /**
- * Once: turn on the floating button on sites saved with the old default, unless they
- * already link to the banner (shortcode or #manage-cookies).
+ * Once: the old choice "none" becomes the footer link if the theme supports it,
+ * otherwise the floating button.
  */
 function hnrk_cookie_migrate_manage_trigger() {
-	if ( get_option( 'hnrk_cookie_trigger_migrated' ) ) {
+	if ( get_option( 'hnrk_cookie_trigger_none_removed' ) ) {
 		return;
 	}
 
 	$stored = get_option( 'hnrk_cookie_settings' );
 
-	if ( is_array( $stored ) && 'none' === ( $stored['manage_cookies_trigger'] ?? '' ) ) {
-		global $wpdb;
-
-		// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-		$in_content = (int) $wpdb->get_var(
-			"SELECT COUNT(*) FROM {$wpdb->posts}
-			WHERE post_status = 'publish'
-			AND ( post_content LIKE '%hnrk_manage_cookies%' OR post_content LIKE '%#manage-cookies%' )"
-		);
-		$in_menus   = (int) $wpdb->get_var(
-			"SELECT COUNT(*) FROM {$wpdb->postmeta}
-			WHERE meta_key = '_menu_item_url' AND meta_value LIKE '%#manage-cookies%'"
-		);
-		// phpcs:enable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-
-		if ( 0 === $in_content && 0 === $in_menus ) {
-			$stored['manage_cookies_trigger'] = 'floating';
-			update_option( 'hnrk_cookie_settings', $stored );
-		}
+	if ( is_array( $stored ) && ! in_array( $stored['manage_cookies_trigger'] ?? '', array( 'floating', 'footer' ), true ) ) {
+		$stored['manage_cookies_trigger'] = hnrk_cookie_footer_supported() ? 'footer' : 'floating';
+		update_option( 'hnrk_cookie_settings', $stored );
 	}
 
-	update_option( 'hnrk_cookie_trigger_migrated', time(), false );
+	update_option( 'hnrk_cookie_trigger_none_removed', time(), false );
 }
 add_action( 'admin_init', 'hnrk_cookie_migrate_manage_trigger' );
 
@@ -401,7 +385,7 @@ function hnrk_cookie_sanitize_settings( $input ) {
 		}
 	}
 
-	$allowed_triggers = array( 'none', 'floating' );
+	$allowed_triggers = array( 'floating', 'footer' );
 	if ( isset( $input['manage_cookies_trigger'] ) && in_array( $input['manage_cookies_trigger'], $allowed_triggers, true ) ) {
 		$clean['manage_cookies_trigger'] = $input['manage_cookies_trigger'];
 	}
@@ -818,20 +802,12 @@ function hnrk_cookie_field_thirdparty() {
 
 /** Renders the reopen trigger field. */
 function hnrk_cookie_field_trigger() {
-	$settings = hnrk_cookie_get_settings();
-	$trigger  = $settings['manage_cookies_trigger'];
-	$position = $settings['manage_cookies_position'];
+	$settings  = hnrk_cookie_get_settings();
+	$trigger   = hnrk_cookie_manage_trigger();
+	$position  = $settings['manage_cookies_position'];
+	$supported = hnrk_cookie_footer_supported();
 	?>
 	<div class="hnrk-cookie-admin__trigger-options">
-		<label class="hnrk-cookie-admin__radio">
-			<input
-				type="radio"
-				name="hnrk_cookie_settings[manage_cookies_trigger]"
-				value="none"
-				<?php checked( $trigger, 'none' ); ?>
-			>
-			<?php esc_html_e( 'None', 'hnrk-cookie-consent' ); ?>
-		</label>
 		<label class="hnrk-cookie-admin__radio">
 			<input
 				type="radio"
@@ -841,17 +817,26 @@ function hnrk_cookie_field_trigger() {
 			>
 			<?php esc_html_e( 'Floating button', 'hnrk-cookie-consent' ); ?>
 		</label>
+		<label class="hnrk-cookie-admin__radio">
+			<input
+				type="radio"
+				name="hnrk_cookie_settings[manage_cookies_trigger]"
+				value="footer"
+				<?php checked( $trigger, 'footer' ); ?>
+				<?php disabled( ! $supported ); ?>
+			>
+			<?php esc_html_e( 'In the footer', 'hnrk-cookie-consent' ); ?>
+		</label>
 	</div>
+	<?php if ( ! $supported ) : ?>
+		<p class="description">
+			<?php esc_html_e( 'The active theme does not print a footer link, so the floating button is used.', 'hnrk-cookie-consent' ); ?>
+		</p>
+	<?php endif; ?>
 
-	<div class="hnrk-cookie-admin__shortcode-box" id="trigger_label_wrapper" <?php echo 'floating' !== $trigger ? 'hidden' : ''; ?>>
-		<p class="hnrk-cookie-admin__shortcode-title">
-			<?php esc_html_e( 'Floating button', 'hnrk-cookie-consent' ); ?>
-		</p>
-		<p class="hnrk-cookie-admin__shortcode-hint">
-			<?php esc_html_e( 'A small button is shown in the corner of the page so visitors can reopen their cookie settings. The button label is optional — default is "Manage cookies".', 'hnrk-cookie-consent' ); ?>
-		</p>
+	<div class="hnrk-cookie-admin__shortcode-box">
 		<label for="manage_cookies_label">
-			<?php esc_html_e( 'Button label', 'hnrk-cookie-consent' ); ?>
+			<?php esc_html_e( 'Label', 'hnrk-cookie-consent' ); ?>
 		</label>
 		<input
 			type="text"
@@ -861,7 +846,13 @@ function hnrk_cookie_field_trigger() {
 			class="regular-text"
 			placeholder="<?php esc_attr_e( 'Manage cookies', 'hnrk-cookie-consent' ); ?>"
 		>
-		<div class="hnrk-cookie-admin__trigger-options" style="margin-top:0.75rem;margin-bottom:0;">
+	</div>
+
+	<div class="hnrk-cookie-admin__shortcode-box" id="trigger_label_wrapper" <?php echo 'floating' !== $trigger ? 'hidden' : ''; ?>>
+		<p class="hnrk-cookie-admin__shortcode-title">
+			<?php esc_html_e( 'Floating button', 'hnrk-cookie-consent' ); ?>
+		</p>
+		<div class="hnrk-cookie-admin__trigger-options" style="margin-bottom:0;">
 			<label class="hnrk-cookie-admin__radio">
 				<input
 					type="radio"

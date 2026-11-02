@@ -11,6 +11,16 @@ plugin uses [Semantic Versioning](https://semver.org/):
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-11-02
+
+### Added
+- "Manage cookies" in the footer: a theme that declares `add_theme_support( 'hnrk-cookie-consent-footer' )` prints the link itself with `hnrk_cookie_manage_link()`. `hnrk_cookie_manage_trigger()` tells the theme which option is in effect.
+- Links that reopen the banner (`#manage-cookies`, the shortcode, `hnrk_cookie_manage_link()`) get `role="button"` and open with the Space key too.
+
+### Changed
+- The reopen options are **Floating button** and **In the footer**. The option "None" is removed, so visitors can always change or withdraw their consent (GDPR). Without theme support, "In the footer" is disabled and the floating button is used. Sites set to "None" are moved once to the footer link if the theme supports it, otherwise to the floating button.
+- The label setting is shared by the floating button and the footer link.
+
 ## [1.2.0] - 2026-11-01
 
 ### Added
